@@ -57,18 +57,32 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a>Gabriella Ulloa</a><sup>1*</sup>,</span>
-                <span class="author-block">
-                  <a href="https://mfpeticco.github.io/about.html" target="_blank">Martin Peticco</a><sup>1*</sup>,</span>
-                  <a>John Marangola</a><sup>1</sup>,</span>
-                  <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://mfpeticco.github.io/about.html" target="_blank">Martin Peticco</a><sup>1*</sup>,</span>
+                <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank">Gabriella Ulloa</a><sup>1*</sup>,</span>
+
+                  <span class="author-block">John Marangola<sup>1</sup>,</span>
+                  <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1</sup></span>
 
                   </div>
+
+                  <!-- <div class="is-size-5 publication-authors">
+                    <span class="author-block">MIT<sup>1</sup>
+                      <br>CoRL 2025 (Under Review)</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div> -->
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block">MIT<sup>1</sup><br>CoRL 2025 (Under Review)</span>
+                    <span class="author-block">
+                      <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <img src="static/images/lab_logo.png" alt="Improbable AI Lab" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
+                        <img src="static/images/mit.jpg" alt="MIT Logo" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
+                        <span>MIT<sup>1</sup></span>
+                      </div>
+                      CoRL 2025 (Under Review)
+                    </span>
                     <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                   </div>
+
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
@@ -129,13 +143,13 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video poster="" id="tree" autoplay height="100%", width="100%">
+      <video poster="" id="tree" autoplay muted loop height="100%">
         <!-- Your video here -->
-        <source src="static/videos/bottle_flip.mp4"
+        <source src="static/videos/dexwrist_trimmed.mp4"
         type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        DexWrist enables dynamic and human-like wrist actions. 1X speed.
+        <b>[1X Speed]</b> DexWrist is capable of performing highly dynamic tasks requiring human-level wrist dexterity.
       </h2>
     </div>
   </div>
@@ -150,7 +164,14 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+            We present the DexWrist, a compliant robotic wrist designed to advance robotic manipulation in highlyconstrained
+            environments, enable dynamic tasks, and speed up data collection. DexWrist is designed to be close to the functional capabilities
+            of the human wrist and achieves mechanical compliance and a
+            greater workspace as compared to existing robotic wrist designs.
+            The DexWrist can supercharge policy learning by (i) enabling
+            faster teleoperation and therefore making data collection more
+            scalable; (ii) completing tasks in fewer steps which reduces trajectory lengths and therefore can ease policy learning; (iii) DexWrist
+            is designed to be torque transparent with easily simulateable kinematics for simulated data collection; and most (iv) importantly expands the workspace of manipulation for approaching cluttered scenes and tasks.
           </p>
         </div>
       </div>
