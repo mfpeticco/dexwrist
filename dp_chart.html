@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Chart Layout</title>
+    <style>
+        .video-chart-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .video-section {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .chart-section {
+            flex: 1;
+            min-width: 600px;
+            max-width: 800px;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-caption {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .speed-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .chart-iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .video-chart-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .video-section {
+                flex: none;
+            }
+
+            .chart-section {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .chart-iframe {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .video-chart-container {
+                padding: 20px 10px;
+                gap: 20px;
+            }
+
+            .video-section {
+                max-width: 280px;
+            }
+
+            .chart-iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero is-small">
+        <div class="video-chart-container">
+            <!-- Left Video -->
+            <div class="video-section">
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="agilex_default_wrist.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="speed-indicator">4x</div>
+                </div>
+                <div class="video-caption">AgileX + Default Wrist</div>
+            </div>
+
+            <!-- Center Chart -->
+            <div class="chart-section">
+                <iframe src="dp_success.html" class="chart-iframe"></iframe>
+            </div>
+
+            <!-- Right Video -->
+            <div class="video-section">
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="agilex_dexwrist.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="speed-indicator">4x</div>
+                </div>
+                <div class="video-caption">AgileX + DexWrist (Ours)</div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
