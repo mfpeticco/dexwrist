@@ -9,20 +9,27 @@
             font-family: 'Arial', sans-serif;
             background: transparent;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            max-height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent scrollbars */
         }
 
         .chart-container {
             background: transparent;
             border-radius: 0;
             box-shadow: none;
-            padding: 40px;
+            padding: 10px 10px 10px 160px; /* Reduced padding, less left padding */
             max-width: 900px;
             width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .chart-title {
@@ -183,8 +190,6 @@
             background: linear-gradient(90deg, transparent 0%, #bdc3c7 20%, #bdc3c7 80%, transparent 100%);
             opacity: 0.3;
         }
-
-
 
         @keyframes growBar1 {
             from { height: 0; }
