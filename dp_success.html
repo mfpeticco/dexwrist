@@ -39,14 +39,14 @@
             margin-bottom: 30px;
             color: #2c3e50;
             opacity: 0;
-            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            animation: fadeIn 0.25s ease-in-out 0.125s forwards;
         }
 
         .chart {
             display: flex;
             align-items: end;
             justify-content: center;
-            height: 400px;
+            height: 800px;
             margin: 40px 0;
             position: relative;
         }
@@ -60,7 +60,7 @@
         }
 
         .bar {
-            width: 120px;
+            width: 240px;
             border-radius: 8px 8px 0 0;
             position: relative;
             transition: all 0.3s ease;
@@ -75,13 +75,13 @@
         .bar-stock {
             background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
             height: 0;
-            animation: growBar1 2s ease-in-out 1s forwards;
+            animation: growBar1 0.5s ease-in-out 0.0625s forwards; /* 4x faster */
         }
 
         .bar-dexwrist {
             background: linear-gradient(180deg, #3498db 0%, #2980b9 100%);
             height: 0;
-            animation: growBar2 2s ease-in-out 1.5s forwards;
+            animation: growBar2 0.5s ease-in-out 0.375s forwards; /* 4x faster */
         }
 
         .bar-label {
@@ -93,7 +93,7 @@
             max-width: 200px;
             line-height: 1.3;
             opacity: 0;
-            animation: fadeIn 1s ease-in-out 2s forwards;
+            animation: fadeIn 0.0625s ease-in-out 0.5s forwards; /* 4x faster */
         }
 
         .percentage-label {
@@ -112,11 +112,11 @@
         }
 
         .percentage-stock {
-            animation: fadeIn 1s ease-in-out 2.5s forwards;
+            animation: fadeIn 0.0625s ease-in-out 0.625s forwards; /* 4x faster */
         }
 
         .percentage-dexwrist {
-            animation: fadeIn 1s ease-in-out 3s forwards;
+            animation: fadeIn 0.0625s ease-in-out 0.75s forwards; /* 4x faster */
         }
 
         .error-bar {
@@ -126,7 +126,7 @@
             width: 3px;
             background: #2c3e50;
             opacity: 0;
-            animation: fadeIn 0.8s ease-in-out 3.2s forwards;
+            animation: fadeIn 0.2s ease-in-out 0.8s forwards; /* 4x faster */
         }
 
         .error-cap {
@@ -159,7 +159,7 @@
             font-size: 16px;
             color: #7f8c8d;
             opacity: 0;
-            animation: fadeIn 1s ease-in-out 0.8s forwards;
+            animation: fadeIn 0.0625s ease-in-out 0.2s forwards; /* 4x faster */
         }
 
         .y-axis-label {
@@ -172,7 +172,7 @@
             font-weight: 600;
             color: #2c3e50;
             opacity: 0;
-            animation: fadeIn 1s ease-in-out 1.2s forwards;
+            animation: fadeIn 0.0625s ease-in-out 0.3s forwards; /* 4x faster */
             white-space: nowrap;
         }
 
@@ -323,21 +323,21 @@
 
             // Restart animations
             setTimeout(() => {
-                document.querySelector('.chart-title').style.animation = 'fadeIn 1s ease-in-out 0.5s forwards';
-                document.querySelector('.y-axis').style.animation = 'fadeIn 1s ease-in-out 0.8s forwards';
-                document.querySelector('.y-axis-label').style.animation = 'fadeIn 1s ease-in-out 1.2s forwards';
-                document.querySelector('.bar-stock').style.animation = 'growBar1 2s ease-in-out 1s forwards';
-                document.querySelector('.bar-dexwrist').style.animation = 'growBar2 2s ease-in-out 1.5s forwards';
+                document.querySelector('.chart-title').style.animation = 'fadeIn 0.0625s ease-in-out 0.03125s forwards';
+                document.querySelector('.y-axis').style.animation = 'fadeIn 0.0625s ease-in-out 0.0625s forwards';
+                document.querySelector('.y-axis-label').style.animation = 'fadeIn 0.0625s ease-in-out 0.075s forwards';
+                document.querySelector('.bar-stock').style.animation = 'growBar1 0.005s ease-in-out 0.005s forwards';
+                document.querySelector('.bar-dexwrist').style.animation = 'growBar2 0.005s ease-in-out 0.005s forwards';
 
                 document.querySelectorAll('.bar-label').forEach(label => {
-                    label.style.animation = 'fadeIn 1s ease-in-out 2s forwards';
+                    label.style.animation = 'fadeIn 0.0625s ease-in-out 0.0625s forwards';
                 });
 
-                document.querySelector('.percentage-stock').style.animation = 'fadeIn 1s ease-in-out 2.5s forwards';
-                document.querySelector('.percentage-dexwrist').style.animation = 'fadeIn 1s ease-in-out 3s forwards';
+                document.querySelector('.percentage-stock').style.animation = 'fadeIn 0.0625s ease-in-out 0.125s forwards';
+                document.querySelector('.percentage-dexwrist').style.animation = 'fadeIn 0.0625s ease-in-out 0.1s forwards';
 
                 document.querySelectorAll('.error-bar').forEach(errorBar => {
-                    errorBar.style.animation = 'fadeIn 0.8s ease-in-out 3.2s forwards';
+                    errorBar.style.animation = 'fadeIn 0.05s ease-in-out 0.25s forwards';
                 });
             }, 50);
         }

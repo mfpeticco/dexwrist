@@ -7,17 +7,25 @@
     <style>
         .video-chart-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 40px;
+            gap: 60px;
             padding: 40px 20px;
             max-width: 1400px;
             margin: 0 auto;
+        }
+        
+        .videos-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 120px;
             flex-wrap: wrap;
         }
 
         .video-section {
-            flex: 0 0 300px;
+            flex: 0 0 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,7 +40,7 @@
 
         .video-container {
             width: 100%;
-            max-width: 300px;
+            max-width: 600px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -112,33 +120,35 @@
 <body>
     <section class="hero is-small">
         <div class="video-chart-container">
-            <!-- Left Video -->
-            <div class="video-section">
-                <div class="video-container">
-                    <video autoplay muted loop playsinline>
-                        <source src="static/videos/stock_agilex_default_dp.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="speed-indicator">1x</div>
-                </div>
-                <div class="video-caption">AgileX + Default Wrist</div>
-            </div>
-
-            <!-- Center Chart -->
+            <!-- Chart on top -->
             <div class="chart-section">
                 <iframe src="dp_success.html" class="chart-iframe"></iframe>
             </div>
-
-            <!-- Right Video -->
-            <div class="video-section">
-                <div class="video-container">
-                    <video autoplay muted loop playsinline>
-                        <source src="static/videos/dexwrist_constrained.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="speed-indicator">1x</div>
+            <!-- Videos below in a row -->
+            <div class="videos-row">
+                <!-- Left Video -->
+                <div class="video-section">
+                    <div class="video-container">
+                        <video autoplay muted loop playsinline>
+                            <source src="static/videos/stock_agilex_default_dp.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="speed-indicator">1x</div>
+                    </div>
+                    <div class="video-caption">AgileX + Default Wrist</div>
                 </div>
-                <div class="video-caption">AgileX + DexWrist (Ours)</div>
+
+                <!-- Right Video -->
+                <div class="video-section">
+                    <div class="video-container">
+                        <video autoplay muted loop playsinline>
+                            <source src="static/videos/dexwrist_constrained.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="speed-indicator">1x</div>
+                    </div>
+                    <div class="video-caption">AgileX + DexWrist (Ours)</div>
+                </div>
             </div>
         </div>
     </section>
