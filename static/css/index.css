@@ -121,6 +121,45 @@ body {
   font-size: 0;
 }
 
+.container {
+  display: flex; /* Enables flexbox for centering */
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically (optional if needed) */
+}
+
+.explainimg {
+  display: flex; /* Enables flexbox for side-by-side layout */
+  justify-content: center; /* Centers the images horizontally */
+  gap: 20px; /* Adds spacing between the images */
+}
+
+.explainimg video {
+  width: 50%; /* Scales the video to 50% of its container's width */
+  height: auto; /* Maintains the aspect ratio */
+}
+
+.explainimg img {
+  width: auto; /* Adjusts the width automatically */
+  height: 600px; /* Sets a consistent height for the images */
+  object-fit: contain; /* Ensures the images maintain their aspect ratio */
+}
+
+.explaintext {
+  padding-top: 20px;
+  padding-bottom: 60px;
+  width: 60%;
+  margin: 0 auto; 
+  text-align: center;
+}
+
+.selltext {
+  padding-top: 20px;
+  padding-bottom: 60px;
+  width: 60%;
+  margin: 0 auto; 
+  text-align: center;
+}
+
 .results-carousel video {
   margin: 0;
 }

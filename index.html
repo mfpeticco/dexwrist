@@ -92,7 +92,7 @@
                         <img src="static/images/mit.jpg" alt="MIT Logo" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
                         <span>MIT<sup>1</sup></span>
                       </div>
-                      (Under Review)
+                      CoRL 2025 (Under Review)
                     </span>
                     <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                   </div>
@@ -157,12 +157,13 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-
-      <video poster="" id="tree" autoplay muted loop height="100%">
+      <div style="display: flex; justify-content: center; align-items: center; ">
+      <video poster="" id="tree" autoplay muted loop width="70%">
         <!-- Your video here -->
         <source src="static/videos/dexwrist_trimmed.mp4"
         type="video/mp4">
       </video>
+      </div>
       <h2 class="subtitle has-text-centered">
         <b>[1X Speed]</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
       </h2>
@@ -179,7 +180,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present the DexWrist, a compliant robotic wrist designed to advance robotic manipulation in highlyconstrained
+            We present the DexWrist, a compliant robotic wrist designed to advance robotic manipulation in highly constrained
             environments, enable dynamic tasks, and speed up data collection. DexWrist is designed to be close to the functional capabilities
             of the human wrist and achieves mechanical compliance and a
             greater workspace as compared to existing robotic wrist designs.
@@ -196,11 +197,75 @@
 <!-- End paper abstract -->
 
 
+
+
+
+
 <section class="hero is-small">
   <div class="hero-body"></div>
   <iframe src="dp_chart.html" width="100%" height="1100px" frameborder="0" scrolling="no"></iframe>
  </section>
 
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Why DexWrist?</h2>
+        <div class="content has-text-justified">
+          <p>
+            DexWrist makes constrained, dynamic manipulation tasks possible on a wide range of robotic arms. It is designed to be close to the functional capabilities of the human wrist, achieving mechanical compliance and a greater workspace compared to existing robotic wrist designs. This allows for faster teleoperation, more scalable data collection, and easier policy learning. The design also enables torque transparency and easily simulatble kinematics, making it suitable for both real-world and simulated environments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Paper video. -->
+      <!-- <h2 class="title is-3">Video Presentation</h2> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+
+        <div class="explainimg">
+          <video poster="" id="video1" autoplay muted loop height="100%">
+            Your video file here
+            <source src="static/videos/wristanimation.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="explaintext">A novel 2-DOF Parallel Kinematic Mechanism (PKM) achieves <b>human-like kinematics</b> while maintaining a <b>one-to-one mapping</b> between the two actuators and each of their DOF, <b>making teleop and policy learning easier</b>. The final DOF is achieved by mounting the wrist to a motor.</h2>
+        
+        <div class="explainimg">
+          <img src="static/images/gearboxregular.png">
+          <img src="static/images/gearboxexploded.png">
+        </div>
+
+        <h2 class="explaintext">Custom Quasi-Direct Drive (QDD) actuators with brushless motors and a 13:1 planetary gearbox allows for <b>dynamic</b> tasks due to its <b>backdriveability and speed</b>, much how humanoid robots achieved dynamic movement using such actuators.</h2>
+
+        <div class="explainimg">
+          <video poster="" id="video1" autoplay muted loop height="100%">
+            Your video file here
+            <source src="static/videos/wristspinfast.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="explaintext">[1x Speed] Finally, DexWrist has a large (+/-40 F/E, R/U) workspace and fits on most commercial robotic arms (AgileX shown). This makes fast, dynamic tasks possible on any arm.</h2>
+
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
