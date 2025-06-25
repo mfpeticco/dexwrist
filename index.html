@@ -82,7 +82,7 @@
 
                   <!-- <div class="is-size-5 publication-authors">
                     <span class="author-block">MIT<sup>1</sup>
-                      <br>CoRL 2025 (Under Review)</span>
+                      <br>(Under Review)</span>
                     <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                   </div> -->
 
@@ -146,6 +146,8 @@
                 </a>
               </span>
             </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist </a>
+
           </div>
         </div>
       </div>
@@ -154,8 +156,26 @@
 </section>
 
 
-<!-- Teaser video-->
-<section class="hero teaser">
+<!-- Why dexwrist section-->
+<section class="section hero is-small is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+<div class="content has-text-justified">
+  <h1 style="text-align: center;">Why DexWrist?</h1>
+  <div style="font-size: 3em; color: #666; line-height: 1; margin-bottom: 10px;">"</div>
+  <div style="margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
+    Recent prosthetics investigations, however, have shown that increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability.<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a>
+  </div>
+  <div style="font-size: 3em; color: #666; line-height: 1; text-align: right;">"</div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End why dexwrist section -->
+
+<!-- Teaser -->
+ <section class="section teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <div style="display: flex; justify-content: center; align-items: center; ">
@@ -165,36 +185,57 @@
         type="video/mp4">
       </video>
       </div>
+      <br>
       <h2 class="subtitle has-text-centered">
         <b>[1X Speed]</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
       </h2>
+
     </div>
   </div>
 </section>
-<!-- End teaser video -->
 
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present the DexWrist, a compliant robotic wrist designed to advance robotic manipulation in highly constrained
-            environments, enable dynamic tasks, and speed up data collection. DexWrist is designed to be close to the functional capabilities
-            of the human wrist and achieves mechanical compliance and a
-            greater workspace as compared to existing robotic wrist designs.
-            The DexWrist can supercharge policy learning by (i) enabling
-            faster teleoperation and therefore making data collection more
-            scalable; (ii) completing tasks in fewer steps which reduces trajectory lengths and therefore can ease policy learning; (iii) DexWrist
-            is designed to be torque transparent with easily simulateable kinematics for simulated data collection; and most (iv) importantly expands the workspace of manipulation for approaching cluttered scenes and tasks.
-          </p>
+
+<section class="section hero is-light" style="width: 100%; margin: 0; padding: 0;">
+  <!-- <div class="container is-max-desktop"> -->
+    <div class="hero-body">
+      <!-- Section Title -->
+      <h2 class="title is-4 has-text-centered heading-fixed">
+        More intuitive and scalable teleoperation in constrained, human-centric environments with DexWrist
+      </h2>
+
+      <div style="display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;">
+        <!-- Left side - image with caption -->
+        <div style="flex: 1 1 45%; display: flex; flex-direction: column; align-items: center;">
+          <img src="static/images/reset_fitted_background_is-light.png" alt="Left Image" style="width: 80%; max-width: 300px; height: auto;">
+          <p class="has-text-centered" style="margin-top: 15px; font-size: 12px; color: #666;">Fewer resets and less overall teleop time --> more scalable.</p>
+        </div>
+
+        <!-- Right side - image with caption -->
+        <div style="flex: 1 1 45%; display: flex; flex-direction: column; align-items: center;">
+          <img src="static/images/transparent_teleop_figure.png" alt="Right Image" style="width: 80%; max-width: 300px; height: auto;">
+          <p class="has-text-centered" style="margin-top: 15px; font-size: 12px; color: #666;">DexWrist's human-like kinematics and design collects shorter, more natural manipulation trajectories in constrained, human-centric environments.</p>
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </section>
+
+<!-- Paper abstract -->
+<!-- <section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+<div class="content has-text-justified">
+  <h1 style="text-align: center;">Why DexWrist?</h1>
+  <div style="font-size: 3em; color: #666; line-height: 1; margin-bottom: 10px;">"</div>
+  <div style="margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
+    Recent prosthetics investigations, however, have shown that increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability.<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a>
+  </div>
+  <div style="font-size: 3em; color: #666; line-height: 1; text-align: right;">"</div>
+</div>
+      </div>
+    </div>
+  </div>
+</section> -->
 <!-- End paper abstract -->
 
 
@@ -209,7 +250,7 @@
 
 
 
-<section class="section hero is-light">
+<section class="section hero is-small is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -218,7 +259,7 @@
           <p>
             <ul>
               <li>Enables constrained, dynamic manipulation tasks on any robot arm</li>
-              <li>Torque transparency and easily simulatable kinematics enables dynamic policy learning</li>
+            <li>Torque transparency and easily simulatable kinematics enables dynamic policy learning</li>
               <li>Facilitates faster teleoperation for more scalable data collection</li>
               <li>Reduces trajectory lengths, making policy learning more efficient</li>
             </ul>
