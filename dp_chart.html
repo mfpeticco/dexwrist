@@ -22,17 +22,18 @@
         }
 
         .three-item-row {
-            display: table;
+            display: flex;
             width: 100%;
-            table-layout: fixed;
-            border-spacing: 20px 0;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: space-between;
         }
 
         .item {
-            display: table-cell;
-            vertical-align: top;
-            width: 33.333%;
+            flex: 1 1 0;
+            min-width: 0;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .chart-container {
@@ -98,16 +99,39 @@
             font-weight: bold;
         }
 
-        /* Fallback for browsers that don't support table-cell well */
-        @supports not (display: table-cell) {
+        /* Fallback for browsers that don't support flexbox well */
+        @supports not (display: flex) {
             .three-item-row {
-                display: flex;
-                gap: 20px;
+                display: table;
+                table-layout: fixed;
+                border-spacing: 20px 0;
             }
 
             .item {
-                display: block;
-                flex: 1;
+                display: table-cell;
+                vertical-align: top;
+                width: 33.333%;
+            }
+        }
+
+        /* Safari-specific fixes */
+        @media not all and (min-resolution:.001dpcm) {
+            @supports (-webkit-appearance:none) {
+                .three-item-row {
+                    display: -webkit-flex;
+                    display: flex;
+                    -webkit-justify-content: space-between;
+                    justify-content: space-between;
+                    -webkit-align-items: flex-start;
+                    align-items: flex-start;
+                }
+
+                .item {
+                    -webkit-flex: 1 1 0%;
+                    flex: 1 1 0%;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                }
             }
         }
 
@@ -130,7 +154,7 @@
             }
 
             .three-item-row {
-                border-spacing: 10px 0;
+                gap: 10px;
             }
         }
 
@@ -148,20 +172,20 @@
             }
 
             .three-item-row {
-                border-spacing: 5px 0;
+                gap: 5px;
             }
         }
 
         /* Only stack on very small screens */
         @media (max-width: 600px) {
             .three-item-row {
-                display: block;
+                flex-direction: column;
+                gap: 20px;
             }
 
             .item {
-                display: block;
+                flex: none;
                 width: 100%;
-                margin-bottom: 20px;
             }
 
             .chart-container {
@@ -174,18 +198,21 @@
         }
 
         /* Additional browser-specific fixes */
-        .item:first-child {
-            padding-left: 0;
+        .item {
+            position: relative;
         }
 
-        .item:last-child {
-            padding-right: 0;
+        /* Ensure consistent spacing across all browsers */
+        .three-item-row > .item:not(:last-child) {
+            margin-right: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="three-item-row">
+            <!-- Chart -->
+
 
             <!-- Left Video -->
             <div class="item">
@@ -199,14 +226,14 @@
                 <div class="video-caption">AgileX + Default Wrist</div>
             </div>
 
-            <!-- Chart -->
+
             <div class="item">
                 <div class="chart-container">
-                    <!-- <div class="chart-placeholder">Chart will be embedded here<br>(dp_success.html)</div> -->
-                     <iframe src="dp_success.html" scrolling="no" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
-
+                   <iframe src="dp_success.html" style="width: 100%; height: 100%; border: 8px;"></iframe>
+                    <!-- <div class="chart-placeholder">Success Rate Chart</div> -->
                 </div>
-                <div class="chart-caption">Success Rate Chart</div>
+
+                <div class="chart-caption">Diffusion Policy Success Rate Comparison</div>
             </div>
 
             <!-- Right Video -->
