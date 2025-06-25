@@ -146,7 +146,7 @@
                 </a>
               </span>
             </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif; margin-top: 20px;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to Purchase a DexWrist! </a>
 
           </div>
         </div>
@@ -263,7 +263,7 @@ limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?t
       <h2 class="title is-4 has-text-centered heading-fixed">
         Reduced horizon length in constrained environments leads to improved success rates for behavioral cloning policies
       </h2>
-      <iframe src="dp_chart.html" width="100%" height="1100px" frameborder="0" scrolling="no"></iframe>
+      <iframe src="dp_chart.html" width="100%" height="800px" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
  </section>
@@ -291,6 +291,76 @@ limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?t
 
   </section>
 
+
+ <section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Why DexWrist?</h2>
+        <div class="content has-text-justified">
+          <p>
+            <ul>
+              <li>Enables constrained, dynamic manipulation tasks on any robot arm</li>
+              <li>Torque transparency and easily simulatable kinematics enables dynamic policy learning</li>
+              <li>Facilitates faster teleoperation for more scalable data collection</li>
+              <li>Reduces trajectory lengths, making policy learning more efficient</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Paper video. -->
+      <!-- <h2 class="title is-3">Video Presentation</h2> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+
+        <div class="explainimg">
+          <video poster="" id="video1" autoplay muted loop height="100%">
+            Your video file here
+            <source src="static/videos/WristAnimation.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="explaintext">A novel 2-DOF Parallel Kinematic Mechanism (PKM) achieves <b>human-like kinematics</b> while maintaining a <b>one-to-one mapping</b> between the two actuators and each of their DOF, <b>making teleop and policy learning easier</b>. The final DOF is achieved by mounting the wrist to a motor.</h2>
+
+        <div class="explainimg">
+          <img src="static/images/gearboxregular.png">
+          <img src="static/images/gearboxexploded.png">
+        </div>
+
+        <h2 class="explaintext">Custom Quasi-Direct Drive (QDD) actuators with brushless motors and a 13:1 planetary gearbox allows for <b>dynamic</b> tasks due to its <b>backdriveability and speed</b>, much how humanoid robots achieved dynamic movement using such actuators.</h2>
+
+        <div class="explainimg">
+          <video poster="" id="video1" autoplay muted loop height="100%">
+            Your video file here
+            <source src="static/videos/wristspinfast.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="explaintext">[1x Speed] Finally, DexWrist has a large workspace and fits on most commercial robotic arms (AgileX shown). This makes fast, dynamic tasks possible on any arm.</h2>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to Purchase a DexWrist!</a>
+  </div></div>
 
   <iframe src="unfinished_bom.html" width="100%" height="400px" frameborder="0" scrolling="no"></iframe>
 
@@ -356,17 +426,14 @@ limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?t
 
 
 <!-- Paper poster -->
-<!-- <section class="hero is-small is-light">
+<section class="hero is-small is-light">
   <div class="hero-body">
+    <h2 class="title is-4 has-text-centered heading-fixed">Poster</h2>
     <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-
+      <iframe src="https://drive.google.com/file/d/1ofqW1u5Tn6R8qa2SEs_r3V4QvRsBEuId/preview" width="640" height="480" allow="autoplay"></iframe>
       </div>
     </div>
-  </section> -->
+  </section>
 <!--End paper poster -->
 
 
@@ -380,9 +447,6 @@ limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?t
 <!--End BibTex citation -->
 
 
-  <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist </a>
-  </div></div>
 
   <!-- <footer class="footer">
   <div class="container">
