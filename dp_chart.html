@@ -5,56 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Chart Layout</title>
     <style>
-        .video-chart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 60px;
-            padding: 40px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .videos-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 120px;
-            flex-wrap: wrap;
+        * {
+            box-sizing: border-box;
         }
 
-        .video-section {
-            flex: 0 0 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .three-item-row {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-spacing: 20px 0;
+        }
+
+        .item {
+            display: table-cell;
+            vertical-align: top;
+            width: 33.333%;
             text-align: center;
         }
 
-        .chart-section {
-            flex: 1;
-            min-width: 600px;
-            max-width: 800px;
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-placeholder {
+            color: #666;
+            font-size: 14px;
         }
 
         .video-container {
             width: 100%;
-            max-width: 600px;
+            height: 250px; /* Fixed height for consistency */
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             margin-bottom: 15px;
             position: relative;
+            background: #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-container:hover {
+            transform: scale(1.15);
+            z-index: 10;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
         }
 
         .video-container video {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover; /* Ensures video fills container while maintaining aspect ratio */
             display: block;
         }
 
-        .video-caption {
+        .video-caption, .chart-caption {
             font-size: 16px;
             font-weight: 600;
             color: #2c3e50;
@@ -74,83 +98,129 @@
             font-weight: bold;
         }
 
-        .chart-iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-        }
-
-        /* Responsive design */
-        @media (max-width: 1200px) {
-            .video-chart-container {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .video-section {
-                flex: none;
-            }
-
-            .chart-section {
-                min-width: auto;
-                width: 100%;
-            }
-
-            .chart-iframe {
-                height: 450px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .video-chart-container {
-                padding: 20px 10px;
+        /* Fallback for browsers that don't support table-cell well */
+        @supports not (display: table-cell) {
+            .three-item-row {
+                display: flex;
                 gap: 20px;
             }
 
-            .video-section {
-                max-width: 280px;
+            .item {
+                display: block;
+                flex: 1;
+            }
+        }
+
+        /* Mobile responsive - keep in row but adjust sizes */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 20px 10px;
             }
 
-            .chart-iframe {
-                height: 400px;
+            .chart-container {
+                height: 300px;
             }
+
+            .video-container {
+                height: 200px;
+            }
+
+            .video-caption, .chart-caption {
+                font-size: 14px;
+            }
+
+            .three-item-row {
+                border-spacing: 10px 0;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .chart-container {
+                height: 250px;
+            }
+
+            .video-container {
+                height: 180px;
+            }
+
+            .video-caption, .chart-caption {
+                font-size: 12px;
+            }
+
+            .three-item-row {
+                border-spacing: 5px 0;
+            }
+        }
+
+        /* Only stack on very small screens */
+        @media (max-width: 600px) {
+            .three-item-row {
+                display: block;
+            }
+
+            .item {
+                display: block;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+
+            .video-container {
+                height: 200px;
+            }
+        }
+
+        /* Additional browser-specific fixes */
+        .item:first-child {
+            padding-left: 0;
+        }
+
+        .item:last-child {
+            padding-right: 0;
         }
     </style>
 </head>
 <body>
-    <section class="hero is-small">
-        <div class="video-chart-container">
-            <!-- Chart on top -->
-            <div class="chart-section">
-                <iframe src="dp_success.html" class="chart-iframe"></iframe>
-            </div>
-            <!-- Videos below in a row -->
-            <div class="videos-row">
-                <!-- Left Video -->
-                <div class="video-section">
-                    <div class="video-container">
-                        <video autoplay muted loop playsinline>
-                            <source src="static/videos/stock_agilex_default_dp.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="speed-indicator">1x</div>
-                    </div>
-                    <div class="video-caption">AgileX + Default Wrist</div>
-                </div>
+    <div class="container">
+        <div class="three-item-row">
 
-                <!-- Right Video -->
-                <div class="video-section">
-                    <div class="video-container">
-                        <video autoplay muted loop playsinline>
-                            <source src="static/videos/dexwrist_constrained.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="speed-indicator">1x</div>
-                    </div>
-                    <div class="video-caption">AgileX + DexWrist (Ours)</div>
+            <!-- Left Video -->
+            <div class="item">
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="static/videos/stock_agilex_default_dp.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="speed-indicator">1x</div>
                 </div>
+                <div class="video-caption">AgileX + Default Wrist</div>
+            </div>
+
+            <!-- Chart -->
+            <div class="item">
+                <div class="chart-container">
+                    <!-- <div class="chart-placeholder">Chart will be embedded here<br>(dp_success.html)</div> -->
+                     <iframe src="dp_success.html" scrolling="no" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>
+
+                </div>
+                <div class="chart-caption">Success Rate Chart</div>
+            </div>
+
+            <!-- Right Video -->
+            <div class="item">
+                <div class="video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="static/videos/dexwrist_constrained.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="speed-indicator">1x</div>
+                </div>
+                <div class="video-caption">AgileX + DexWrist (Ours)</div>
             </div>
         </div>
-    </section>
+    </div>
 </body>
 </html>
