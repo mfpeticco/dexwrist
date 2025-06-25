@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trajectory Length Comparison</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+            font-family: Arial, sans-serif;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            margin: 0 auto;
+            background: transparent;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <canvas id="trajectoryChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('trajectoryChart').getContext('2d');
+
+        // Data points for scatter plot (approximate from the image)
+        const agileXData = [
+            {x: 0, y: 2800}, {x: 0, y: 2700}, {x: 0, y: 3200}, {x: 0, y: 3100},
+            {x: 1, y: 1300}, {x: 1, y: 1400}, {x: 1, y: 1500}, {x: 1, y: 1200},
+            {x: 2, y: 800}, {x: 2, y: 900}, {x: 2, y: 1400}, {x: 2, y: 950}
+        ];
+
+        const dexWristData = [
+            {x: 0, y: 950}, {x: 0, y: 980}, {x: 0, y: 920},
+            {x: 1, y: 650}, {x: 1, y: 700}, {x: 1, y: 880},
+            {x: 2, y: 450}, {x: 2, y: 500}, {x: 2, y: 550}, {x: 2, y: 600}
+        ];
+
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Deep Drawer', 'Unplug Cable', 'Cluttered Fridge'],
+                datasets: [
+                    {
+                        label: 'AgileX + Default Wrist',
+                        data: [2200, 950, 550],
+                        backgroundColor: 'rgba(205, 92, 92, 0.8)',
+                        borderColor: 'rgba(205, 92, 92, 1)',
+                        borderWidth: 2,
+                        barThickness: 120
+                    },
+                    {
+                        label: 'DexWrist (Ours)',
+                        data: [550, 450, 450],
+                        backgroundColor: 'rgba(100, 149, 237, 0.8)',
+                        borderColor: 'rgba(100, 149, 237, 1)',
+                        borderWidth: 2,
+                        barThickness: 120
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                backgroundColor: 'transparent',
+                interaction: {
+                    intersect: false,
+                    mode: 'none'
+                },
+                hover: {
+                    mode: null
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Comparison of Trajectory Lengths for Successful Demonstrations',
+                        font: {
+                            size: 20,
+                            weight: 'bold'
+                        },
+                        color: '#000000',
+                        padding: 20
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            color: '#000000',
+                            font: {
+                                size: 14
+                            },
+                            boxWidth: 20,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 3500,
+                        title: {
+                            display: true,
+                            text: 'Trajectory Length (timesteps, dt = 1/30)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#000000'
+                        },
+                        ticks: {
+                            color: '#000000',
+                            font: {
+                                size: 12
+                            },
+                            stepSize: 500
+                        },
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.3)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#000000',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'scatter-overlay',
+                afterDatasetsDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const chartArea = chart.chartArea;
+
+                    // Add scatter points for AgileX Stock
+                    ctx.fillStyle = 'rgba(255, 140, 0, 0.8)';
+                    agileXData.forEach(point => {
+                        const x = chart.scales.x.getPixelForValue(point.x);
+                        const y = chart.scales.y.getPixelForValue(point.y);
+                        ctx.beginPath();
+                        ctx.arc(x - 60 + Math.random() * 40, y, 4, 0, 2 * Math.PI);
+                        ctx.fill();
+                    });
+
+                    // Add scatter points for DexWrist
+                    ctx.fillStyle = 'rgba(70, 130, 180, 0.8)';
+                    dexWristData.forEach(point => {
+                        const x = chart.scales.x.getPixelForValue(point.x);
+                        const y = chart.scales.y.getPixelForValue(point.y);
+                        ctx.beginPath();
+                        ctx.arc(x + 60 + Math.random() * 40, y, 4, 0, 2 * Math.PI);
+                        ctx.fill();
+                    });
+
+                    // Add error bars
+                    ctx.strokeStyle = '#000000';
+                    ctx.lineWidth = 2;
+
+                    // Error bars for bars (approximate)
+                    const errorBars = [
+                        {x: 0, y: 2200, error: 850}, // Deep Drawer AgileX
+                        {x: 0, y: 550, error: 150},  // Deep Drawer DexWrist
+                        {x: 1, y: 950, error: 200},  // Unplug Cable AgileX
+                        {x: 1, y: 450, error: 100},  // Unplug Cable DexWrist
+                        {x: 2, y: 550, error: 150},  // Cluttered Fridge AgileX
+                        {x: 2, y: 450, error: 100}   // Cluttered Fridge DexWrist
+                    ];
+
+                    errorBars.forEach((bar, index) => {
+                        const isAgileX = index % 2 === 0;
+                        const xPos = chart.scales.x.getPixelForValue(bar.x) + (isAgileX ? -60 : 60);
+                        const yPos = chart.scales.y.getPixelForValue(bar.y);
+                        const errorTop = chart.scales.y.getPixelForValue(bar.y + bar.error);
+                        const errorBottom = chart.scales.y.getPixelForValue(bar.y - bar.error);
+
+                        // Vertical line
+                        ctx.beginPath();
+                        ctx.moveTo(xPos, errorTop);
+                        ctx.lineTo(xPos, errorBottom);
+                        ctx.stroke();
+
+                        // Top cap
+                        ctx.beginPath();
+                        ctx.moveTo(xPos - 8, errorTop);
+                        ctx.lineTo(xPos + 8, errorTop);
+                        ctx.stroke();
+
+                        // Bottom cap
+                        ctx.beginPath();
+                        ctx.moveTo(xPos - 8, errorBottom);
+                        ctx.lineTo(xPos + 8, errorBottom);
+                        ctx.stroke();
+
+                        // Center dot
+                        ctx.fillStyle = '#000000';
+                        ctx.beginPath();
+                        ctx.arc(xPos, yPos, 3, 0, 2 * Math.PI);
+                        ctx.fill();
+                    });
+                }
+            }]
+        });
+
+
+    </script>
+</body>
+</html>

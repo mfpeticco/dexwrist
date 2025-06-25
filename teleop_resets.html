@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Table</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+            font-family: Arial, sans-serif;
+        }
+
+        .table-container {
+            display: inline-block;
+            background: white;
+            border: 2px solid #333;
+            border-collapse: separate;
+        }
+
+        table {
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .system-header {
+            text-align: left;
+            width: 180px;
+        }
+
+        .main-header {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .sub-header {
+            font-size: 12px;
+            font-weight: bold;
+            width: 60px;
+        }
+
+        .system-cell {
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .highlight-row {
+            font-weight: bold;
+        }
+
+        .highlight-row .system-cell {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="system-header main-header">System</th>
+                    <th colspan="3" class="main-header">Average Operator Time (s)</th>
+                    <th colspan="3" class="main-header">Average Number of Resets</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">Drawer</th>
+                    <th class="sub-header">Cable</th>
+                    <th class="sub-header">Fridge</th>
+                    <th class="sub-header">Drawer</th>
+                    <th class="sub-header">Cable</th>
+                    <th class="sub-header">Fridge</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="system-cell">AgileX + Default Wrist</td>
+                    <td>72.9</td>
+                    <td>76.3</td>
+                    <td>63.3</td>
+                    <td>1.1</td>
+                    <td>0.6</td>
+                    <td>1.7</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td class="system-cell">AgileX + DexWrist (Ours)</td>
+                    <td>33.0</td>
+                    <td>28.0</td>
+                    <td>39.5</td>
+                    <td>0.4</td>
+                    <td>0.4</td>
+                    <td>1.0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
