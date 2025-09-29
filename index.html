@@ -61,7 +61,7 @@
 <body>
 
 
-  <section class="hero">
+  <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/images/background.gif'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -71,10 +71,11 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <span class="author-block"><a href="https://mfpeticco.github.io/about.html" target="_blank">Martin Peticco</a><sup>1*</sup>,</span>
-                <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank">Gabriella Ulloa</a><sup>1*</sup>,</span>
+                <span class="author-block"><a href="https://mfpeticco.github.io/about.html" target="_blank">Martin Peticco</a><sup>1</sup>,</span>
+                <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank">Gabriella Ulloa</a><sup>1</sup>,</span>
 
                   <span class="author-block">John Marangola<sup>1</sup>,</span>
+                  <a href="https://www.nitishdashora.com/" target="_blank"><span class="author-block">Nitish Dashora<sup>1</sup>,</span></a>
                   <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1</sup></span>
 
                   </div>
@@ -87,20 +88,20 @@
 
                   <div class="is-size-5 publication-authors">
                     <span class="author-block">
+                      <span>MIT<sup>1</sup></span>
                       <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
                         <img src="static/images/lab_logo.png" alt="Improbable AI Lab" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
                         <img src="static/images/mit.jpg" alt="MIT Logo" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
-                        <span>MIT<sup>1</sup></span>
                       </div>
                       (Under Review)
                     </span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
                   </div>
 
-
                   <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- Arxiv PDF link -->
+
+                  <!-- Arxiv PDF link -->
+                    <!-- <div class="publication-links">
                       <span class="link-block">
                         <a href="https://arxiv.org/abs/2507.01008" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
@@ -109,7 +110,7 @@
                         </span>
                         <span>Paper</span>
                       </a>
-                    </span>
+                    </span> -->
 
                     <!-- Supplementary PDF link -->
                     <!-- <span class="link-block">
@@ -155,78 +156,95 @@
 </section>
 
 
+
 <!-- Why dexwrist section-->
 <section class="section hero is-small is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-<div class="content has-text-justified">
-  <h1 style="text-align: center;">Motivation</h1>
-  <div style="font-size: 3em; color: #666; line-height: 1; margin-bottom: 10px;">"</div>
-  <div style="margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
-    <!-- Recent prosthetics investigations, however, have shown that increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability.<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a> -->
-     The spatial orientation of an end-effector such as a hand or
-    a gripper is closely tied to its ability to perform a desired
-    task, and nearly all robotic and prosthetic arms incorporate some
-    type of wrist for this purpose. Yet both the academic and industrial research communities have tended to place more focus on
-hand/gripper development than that of wrist systems. Recent
-prosthetics investigations, however, have shown that increased
-dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with
-limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a>
-  </div>
-  <div style="font-size: 3em; color: #666; line-height: 1; text-align: right;">"</div>
-</div>
+      <div class="content has-text-justified">
+        <h1 class="section-title">Motivation</h1>
+        <div style="font-size: 2em; color: #666; line-height: 1; margin-bottom: 10px;">"</div>
+        <div style="font-size: 1.4em; margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
+          <!-- Recent prosthetics investigations, however, have shown that increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability.<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a> -->
+          <p>The spatial orientation of an end-effector such as a hand or a gripper is closely tied to its ability to perform a desired task [...] Yet both the academic and industrial research communities have tended to place more focus on hand/gripper development than that of wrist systems. </p>
+          
+          <p>Recent prosthetics investigations, however, have shown that <b>increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability. </b> <a href="https://ieexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a></p>
+        </div>
+        <div style="font-size: 2em; color: #666; line-height: 1; text-align: right;">"</div>
+      </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End why dexwrist section -->
 
-<!-- Teaser -->
- <section class="section teaser">
+<!-- Teaser Section 1 -->
+<section class="section teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <div style="display: flex; justify-content: center; align-items: center; ">
-      <video poster="" id="tree" autoplay muted loop width="70%">
-        <!-- Your video here -->
-        <source src="static/videos/dexwrist_trimmed.mp4"
-        type="video/mp4">
-      </video>
+      <h1 class="section-title">DexWrist enables highly dynamic and contact-rich tasks</h1>
+      <div class="teaser-gifs">
+        <div class="gif-item">
+          <img src="static/images/bottleflip.gif" alt="Bottle Flip">
+          <p>Demonstration (1x Speed)</p>
+        </div>
+        <div class="gif-item">
+          <img src="static/images/agilewipe.gif" alt="Agile Wipe">
+          <p>Demonstration (1x Speed)</p>
+        </div>
+        <div class="gif-item">
+          <img src="static/images/robustwipe.gif" alt="Robust Wipe">
+          <p>Rollout (1x Speed)</p>
+        </div>
       </div>
       <br>
       <h2 class="subtitle has-text-centered">
-        <b>[1X Speed]</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
+        <b>(1X Speed)</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
       </h2>
-
     </div>
   </div>
 </section>
 
-<section class="section hero is-light" style="width: 100%; margin: 0; padding: 0;">
-  <div class="hero-body">
-    <!-- Section Title -->
-    <h2 class="title is-4 has-text-centered heading-fixed">
-      Enables more efficient and intuitive teleoperation in constrained, human-centric environments
-    </h2>
-
-    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-      <!-- Left side - image with caption -->
-      <div style="flex: 1 1 45%; display: flex; flex-direction: column; align-items: center; min-width: 300px;">
-        <div style="width: 100%; max-width: 500px; display: flex; justify-content: center; align-items: center; min-height: 250px;">
-          <img src="static/images/reset_fitted_background_is-light.png" alt="Left Image" style="width: 100%; height: 450px; object-fit: contain;">
+<!-- Teaser Section 2 -->
+<section class="section teaser has-background-light">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h1 class="section-title">DexWrist enables constrained-space manipulation</h1>
+      <div class="teaser-gifs">
+        <div class="gif-item">
+          <img src="static/images/fridgepick.gif" alt="Fridge Pick">
+          <p>Demonstration (1x Speed)</p>
         </div>
-        <p class="has-text-centered" style="margin-top: 0px; font-size: 16px; color: #666; max-width: 500px; line-height: 1.4;">
-          More data efficient: Fewer environment resets required and less overall human teleoperator time in constrained spaces.
-        </p>
+        <div class="gif-item">
+          <img src="static/images/cableunplug.gif" alt="Cable Unplug">
+          <p>Demonstration (1x Speed)</p>
+        </div>
+        <div class="gif-item">
+          <img src="static/images/drawerpick.png" alt="Drawer Pick">
+          <p>Demonstration</p>
+        </div>
       </div>
+      <br>
+      <h2 class="subtitle has-text-centered">
+        <b>(1X Speed)</b> DexWrist enables manipulation in constrained spaces where traditional wrists fail.
+      </h2>
+    </div>
+  </div>
+</section>
 
-      <!-- Right side - image with caption -->
-      <div style="flex: 1 1 45%; display: flex; flex-direction: column; align-items: center; min-width: 300px;">
-        <div style="width: 100%; max-width: 500px; display: flex; justify-content: center; align-items: center;">
-          <img src="static/images/transparent_teleop_figure.png" alt="Right Image" style="width: 100%; height: 450px; object-fit: contain;">
+
+<section class="section teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h1 class="section-title">More efficient and intuitive teleoperation in constrained, human-centric environments due to its human-level wrist dexterity</h1>
+      <div class="teaser-gifs">
+        <div class="gif-item">
+          <img src="static/images/teleoptable.png" alt="Teleoperation Table"  style="width: 80%">
+          <p style="font-size:1.25em">More data efficient: Fewer environment resets required and less overall human teleoperator time in constrained spaces.</p>
         </div>
-        <p class="has-text-centered" style="margin-top: 0px; font-size: 16px; color: #666; max-width: 500px; line-height: 1.4;">
-          More intuitive: DexWrist's human-like kinematics and design collect shorter trajectories and more natural behavior for manipulation in constrained, human-centric environments.
-        </p>
+        <div class="gif-item">
+          <img src="static/images/transparent_teleop_figure.png" alt="Teleoperation Figure">
+          <p style="font-size:1.25em">More intuitive: DexWrist's human-like kinematics and design collect shorter trajectories and more natural behavior for manipulation in constrained, human-centric environments.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -257,42 +275,85 @@ limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?t
 <!-- End paper abstract -->
 
 
-
-
-
-
-<section class="hero is-small">
+<section class="section teaser has-background-light">
+  <div class="container is-max-desktop">
     <div class="hero-body">
-            <!-- Section Title -->
-      <h2 class="title is-4 has-text-centered heading-fixed">
-        Reduced horizon length in constrained environments leads to improved success rates for behavioral cloning policies
-      </h2>
-      <iframe src="dp_chart.html" width="100%" height="800px" frameborder="0" scrolling="no"></iframe>
+      <h1 class="section-title">Reduced horizon length in constrained environments leads to improved success rates for behavioral cloning policies</h1>
+      <!-- Give a safe initial height so the chart is visible even if resize fails -->
+      <iframe id="dpChartFrame" src="dp_chart_new.html" width="100%" style="border:0; overflow:hidden; height:520px;" frameborder="0" scrolling="no"></iframe>
+      <script>
+        (function(){
+          function resizeFrameToDoc() {
+            var f = document.getElementById('dpChartFrame');
+            if (!f) return;
+            try {
+              var doc = f.contentDocument || f.contentWindow.document;
+              if (doc) {
+                var h = Math.max(
+                  doc.documentElement.scrollHeight,
+                  doc.body ? doc.body.scrollHeight : 0
+                );
+                if (h && !isNaN(h)) f.style.height = h + 'px';
+              }
+            } catch(e){
+              /* cross-origin/file:// may block access; rely on postMessage instead */
+            }
+          }
+
+          window.addEventListener('message', function(e){
+            // Accept messages regardless of origin (works for file:// and different origins)
+            var d = e.data || {};
+            var f = document.getElementById('dpChartFrame');
+            if (!f || e.source !== (f.contentWindow || f)) return;
+            if (d.type === 'dexwrist-chart-height' && typeof d.height === 'number') {
+              f.style.height = d.height + 'px';
+            }
+          });
+
+          var frame = document.getElementById('dpChartFrame');
+          frame.addEventListener('load', function(){
+            // Try direct sizing if same-origin
+            resizeFrameToDoc();
+            // Always ask the child to report its height (works cross-origin)
+            if (frame.contentWindow) {
+              frame.contentWindow.postMessage({type:'request-height'}, '*');
+            }
+          });
+
+          window.addEventListener('resize', function(){
+            if (frame.contentWindow) {
+              frame.contentWindow.postMessage({type:'request-height'}, '*');
+            }
+            resizeFrameToDoc();
+          });
+        })();
+      </script>
+      
     </div>
   </div>
- </section>
+</section>
 
- <section class="hero is-small is-light">
+<section class="section teaser">
+  <div class="container is-max-desktop">
     <div class="hero-body">
-            <!-- Section Title -->
-      <h2 class="title is-4 has-text-centered heading-fixed">
-        Human-like design of the wrist generates natural behavior during teleoperation resulting in faster task completion
-      </h2>
-       <div style="flex: 1 1 45%; display: flex; flex-direction: column; align-items: center;">
-          <img src="static/images/policy_speed.png" alt="Polcy speed" style="width: 100%; max-width: 500px; height: auto;">
-          <p class="has-text-centered" style="margin-top: 15px; font-size: 16px; color: #666;">Diffusion policies trained for the DexWrist were <b>3.24x</b>  faster at retrieving objects from a cluttered refrigerator than the AgileX + default wrist. </p>
+      <h1 class="section-title">Human-like design of the wrist generates natural behavior during teleoperation resulting in faster task completion</h1>
+      <div class="teaser-gifs">
+        <div class="gif-item">
+          <img src="static/images/policy_speed.png" alt="Policy speed" style="width: 100%; max-width: 500px; height: auto;">
+          <p style="font-size:1.25em">Diffusion policies trained for the DexWrist were <b>3.2x</b> faster at retrieving objects from a cluttered refrigerator than the AgileX + default wrist, and <b>4.9x</b> faster at dynamically wiping a whiteboard.</p>
         </div>
+      </div>
     </div>
   </div>
- </section>
+</section>
 
 
 
- <section class="section hero">
+ <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Why DexWrist?</h2>
+        <h1 class="section-title">Why DexWrist?</h1>
         <div class="content has-text-justified">
           <p>
             <ul>
@@ -459,6 +520,18 @@ limited wrist capability. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?t
         </div>
       </div>
     </div>
+  </div>
+</footer> -->
+
+<!-- Statcounter tracking code -->
+
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
+  </html>
   </div>
 </footer> -->
 

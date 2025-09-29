@@ -1,7 +1,6 @@
 body {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-
 
 .footer .icon-link {
     font-size: 25px;
@@ -17,14 +16,13 @@ body {
   font-variant: small-caps;
 }
 
-
-.teaser .hero-body {
-  padding-top: 0;
-  padding-bottom: 3rem;
+  
+.subtitle {
+  padding-top:30px;
+  font-size: 1.5rem;
 }
 
-.teaser {
-  font-family: 'Google Sans', sans-serif;
+.teaser .hero-body {
 }
 
 
@@ -114,6 +112,14 @@ body {
   overflow: hidden;
 }
 
+.section-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: black;
+}
+
 .results-carousel .item {
   margin: 5px;
   overflow: hidden;
@@ -122,9 +128,10 @@ body {
 }
 
 .container {
-  display: flex; /* Enables flexbox for centering */
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically (optional if needed) */
+  display: block; /* ensure Bulma containers behave as blocks */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .explainimg {
@@ -172,5 +179,108 @@ body {
   font-size: smaller;
 }
 
+.hero .title,
+.hero .publication-title,
+.hero .publication-authors,
+.hero .publication-authors a {
+    color: white !important;
+}
 
 
+.hero .hero-body {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+/* Increase overall site width */
+.container.is-max-desktop {
+    max-width: 1200px !important;
+}
+
+@media screen and (min-width: 1408px) {
+    .container.is-max-desktop {
+        max-width: 1200px !important;
+    }
+}
+
+/* Teaser shared layout (used by both teaser sections) */
+.teaser .teaser-gifs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.teaser .gif-item {
+  flex: 1 1 30%;
+  min-width: 280px;
+  text-align: center;
+}
+
+.teaser .gif-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Larger captions under teaser GIFs */
+.teaser .gif-item p {
+  font-size: 1.4rem; /* approx Bulma is-size-5 */
+  line-height: 1.4;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 900px) {
+  .explainimg {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .explainimg img {
+    height: 300px;
+  }
+  
+  .explainimg video {
+    width: 100%;
+  }
+
+  .explaintext {
+    width: 90%;
+  }
+  
+  /* Target the teaser flex container directly */
+  .teaser .teaser-gifs {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .teaser .gif-item {
+    width: 90% !important;
+    max-width: 300px !important;
+    min-width: 0 !important; /* ensure min-width doesn't fight mobile width */
+    margin-bottom: 20px !important;
+  }
+  
+  .teaser .gif-item img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Make efficiency/intuitive images stack on mobile */
+  .section.hero.is-light .hero-body > div {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  
+  .section.hero.is-light .hero-body > div > div {
+    min-width: auto !important;
+    flex: none !important;
+  }
+  
+  /* Ensure container doesn't overflow */
+  .container.is-max-desktop {
+    max-width: 100% !important;
+    padding: 0 10px !important;
+  }
+}
