@@ -48,15 +48,28 @@
       font-size: 14px;
     }
 
+    /* Legend in top-right, overlaying the chart */
+    .chart-wrap {
+      position: relative;
+    }
+
     .legend {
+      position: absolute;
+      top: 10px;
+      right: 18px;
       display: flex;
-      gap: 18px;
+      gap: 16px;
       align-items: center;
-      justify-content: center;
-      /* center items horizontally */
-      margin: 18px auto 18px;
-      /* center the block itself */
+      justify-content: flex-end;
       font-size: 1.2em;
+      background: rgba(255, 255, 255, .55);
+      padding: 8px 12px;
+      border-radius: 10px;
+      backdrop-filter: saturate(120%) blur(2px);
+      margin: 0;
+      /* override previous centering margins */
+      z-index: 1;
+      /* ensure it sits above the SVG */
     }
 
     .legend .key {
@@ -73,10 +86,6 @@
     }
 
     /* === SVG sizing === */
-    .chart-wrap {
-      position: relative
-    }
-
     svg {
       width: 100%;
       height: 420px;
@@ -169,7 +178,7 @@
 
     .policy-item video {
       width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 16/10;
       /* equal height for both */
       object-fit: cover;
       /* fill the container, crop if needed */
@@ -206,12 +215,15 @@
     <h2 class="chart-title">Policy Success Rate (%)</h2>
     <!-- <p class="chart-subtitle">Default Wrist vs DexWrist (Ours)</p> -->
 
-    <div class="legend" aria-hidden="false" role="list">
-      <span class="key" role="listitem"><i class="swatch" style="background:var(--series-a)"></i> Default Wrist</span>
-      <span class="key" role="listitem"><i class="swatch" style="background:var(--series-b)"></i> DexWrist (Ours)</span>
-    </div>
-
     <div class="chart-wrap">
+      <!-- Moved legend inside chart-wrap so it can be positioned top-right over the SVG -->
+      <div class="legend" aria-hidden="false" role="list">
+        <span class="key" role="listitem"><i class="swatch" style="background:var(--series-a)"></i> Default Wrist
+        </span>
+        <span class="key" role="listitem"><i class="swatch" style="background:var(--series-b)"></i> DexWrist
+          (Ours)</span>
+      </div>
+
       <svg id="chartSvg" viewBox="0 0 900 420" aria-labelledby="chartTitle chartDesc" role="img">
         <title id="chartTitle">Policy Success Rate</title>
         <desc id="chartDesc">Grouped bar chart comparing Default Wrist and DexWrist across tasks.</desc>

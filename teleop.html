@@ -1,227 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trajectory Length Comparison</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background: transparent;
-            font-family: Arial, sans-serif;
-        }
-        .chart-container {
-            width: 100%;
-            max-width: 1200px;
-            height: 600px;
-            margin: 0 auto;
-            background: transparent;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Human Teleoperation Length Comparison – DexWrist</title>
+  <style>
+    :root {
+      --series-a: #ff7f50;
+      /* Default Wrist */
+      --series-b: #87cefa;
+      /* DexWrist (Ours) */
+      --axis: #d0d0d0;
+      --grid: #2b2b2b;
+      --bg: #ffffff;
+      --text: #2b2b2b;
+      --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-    </style>
+      /* Chart aspect ratio controls (width:height). Update these to change ratio. */
+      --chart-w: 1100; /* current width units */
+      --chart-h: 800;  /* current height units */
+    }
+
+    body{ margin:0; background:var(--bg); color:var(--text); font-family:var(--font); }
+
+    .chart-section{ max-width:1100px; margin:56px auto 0; padding:0 18px; }
+
+    .chart-title{
+      margin:0 0 6px 0; text-align:center; font-weight:800;
+      font-size:1.7em; letter-spacing:.3px;
+    }
+
+    /* Legend placed inside the chart, top-right */
+    .chart-wrap{ position:relative; }
+    .legend{
+      position:absolute; top:10px; right:18px;
+      display:flex; gap:16px; align-items:center; justify-content:flex-end;
+      font-size:1.15em; background:rgba(255,255,255,.55);
+      padding:8px 12px; border-radius:10px; backdrop-filter:saturate(120%) blur(2px);
+    }
+    .legend .key{ display:inline-flex; align-items:center; gap:8px; white-space:nowrap; }
+    .legend .swatch{ width:14px; height:14px; border-radius:3px; display:inline-block; }
+
+    /* === SVG sizing (use aspect ratio instead of fixed height) === */
+    svg{
+      width:100%;
+      height:auto;                            /* let height derive from aspect-ratio */
+      aspect-ratio: calc(var(--chart-w) / var(--chart-h));
+      display:block;
+    }
+
+    /* Bars animate up */
+    rect.bar{
+      transform:scaleY(0); transform-origin:bottom; transform-box:fill-box;
+      transition:transform 2200ms cubic-bezier(.22,.8,.22,1);
+    }
+    rect.bar[data-delay]{ transition-delay:var(--d,0ms); }
+    svg.in-view rect.bar{ transform:scaleY(1); }
+
+    .axis text{ font-size:22px; fill:var(--text); }
+    .grid line{ stroke:var(--grid); stroke-width:1; shape-rendering:crispEdges; stroke-dasharray:3 6; }
+    .axis line,.axis path{ stroke:var(--axis); stroke-width:1; }
+
+    .err{ stroke:#2b2b2b; stroke-width:2; }
+
+    .cat-label{ font-size:1.5em; fill:#222; }
+    .y-title{ font-size:22px; fill:var(--text); }
+    .value-label{ font-size:24px; font-weight:700; fill:#30343d; }
+
+    @media (prefers-reduced-motion: reduce){ rect.bar{ transition-duration:0ms; } }
+  </style>
 </head>
 <body>
-    <div class="chart-container">
-        <canvas id="trajectoryChart"></canvas>
+  <section class="chart-section" id="dexwrist-chart">
+    <h2 class="chart-title">Human Teleoperation Length Comparison</h2>
+
+    <div class="chart-wrap">
+      <div class="legend" role="list" aria-hidden="false">
+        <span class="key" role="listitem"><i class="swatch" style="background:var(--series-a)"></i> Default Wrist</span>
+        <span class="key" role="listitem"><i class="swatch" style="background:var(--series-b)"></i> DexWrist (Ours)</span>
+      </div>
+
+      <svg id="chartSvg" viewBox="0 0 1100 520" aria-labelledby="chartTitle chartDesc" role="img">
+        <title id="chartTitle">Human Teleoperation Length Comparison</title>
+        <desc id="chartDesc">Grouped bar chart comparing trajectory lengths for Default Wrist vs DexWrist across tasks.</desc>
+      </svg>
     </div>
+  </section>
 
-    <script>
-        const ctx = document.getElementById('trajectoryChart').getContext('2d');
+  <script>
+    /* ===== DATA to match the figure ===== */
+    const data = [
+      { label: "Deep Drawer",           sub: "(AgileX)", default: 71.67,   dex: 18.33, defaultErr: 30.0,  dexErr: 5.0  },
+      { label: "Unplug Cable",          sub: "(AgileX)", default: 30.10,   dex: 14.32, defaultErr: 10.0,  dexErr: 4.67 },
+      { label: "Cluttered Fridge",      sub: "(AgileX)", default: 18.57,   dex: 14.97, defaultErr: 7.0,   dexErr: 3.33 },
+      { label: "Whiteboard Erase",      sub: "(UR3e)",   default: 13.6814, dex: 7.29,  defaultErr: 7.127, dexErr: 1.98 },
+    ];
 
-        // Data points for scatter plot (approximate from the image)
-        const agileXData = [
-            {x: 0, y: 2800}, {x: 0, y: 2700}, {x: 0, y: 3200}, {x: 0, y: 3100},
-            {x: 1, y: 1300}, {x: 1, y: 1400}, {x: 1, y: 1500}, {x: 1, y: 1200},
-            {x: 2, y: 800}, {x: 2, y: 900}, {x: 2, y: 1400}, {x: 2, y: 950}
-        ];
+    const CONFIG = {
+      yMax: null,
+      margins: { top: 56, right: 24, bottom: 120, left: 72 }
+    };
 
-        const dexWristData = [
-            {x: 0, y: 950}, {x: 0, y: 980}, {x: 0, y: 920},
-            {x: 1, y: 650}, {x: 1, y: 700}, {x: 1, y: 880},
-            {x: 2, y: 450}, {x: 2, y: 500}, {x: 2, y: 550}, {x: 2, y: 600}
-        ];
+    (function renderChart(){
+      const svg = document.getElementById('chartSvg');
 
-        const chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Deep Drawer', 'Unplug Cable', 'Cluttered Fridge'],
-                datasets: [
-                    {
-                        label: 'AgileX + Default Wrist',
-                        data: [2200, 950, 550],
-                        backgroundColor: 'rgba(205, 92, 92, 0.8)',
-                        borderColor: 'rgba(205, 92, 92, 1)',
-                        borderWidth: 2,
-                        barThickness: 120
-                    },
-                    {
-                        label: 'DexWrist (Ours)',
-                        data: [550, 450, 450],
-                        backgroundColor: 'rgba(100, 149, 237, 0.8)',
-                        borderColor: 'rgba(100, 149, 237, 1)',
-                        borderWidth: 2,
-                        barThickness: 120
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                backgroundColor: 'transparent',
-                interaction: {
-                    intersect: false,
-                    mode: 'none'
-                },
-                hover: {
-                    mode: null
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Comparison of Trajectory Lengths for Successful Demonstrations',
-                        font: {
-                            size: 20,
-                            weight: 'bold'
-                        },
-                        color: '#000000',
-                        padding: 20
-                    },
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        align: 'end',
-                        labels: {
-                            color: '#000000',
-                            font: {
-                                size: 14
-                            },
-                            boxWidth: 20,
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        enabled: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 3500,
-                        title: {
-                            display: true,
-                            text: 'Trajectory Length (timesteps, dt = 1/30)',
-                            font: {
-                                size: 16,
-                                weight: 'bold'
-                            },
-                            color: '#000000'
-                        },
-                        ticks: {
-                            color: '#000000',
-                            font: {
-                                size: 12
-                            },
-                            stepSize: 500
-                        },
-                        grid: {
-                            color: 'rgba(200, 200, 200, 0.3)'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#000000',
-                            font: {
-                                size: 14,
-                                weight: 'bold'
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            },
-            plugins: [{
-                id: 'scatter-overlay',
-                afterDatasetsDraw: function(chart) {
-                    const ctx = chart.ctx;
-                    const chartArea = chart.chartArea;
+      // NEW: set viewBox from CSS variables so drawing space matches the aspect ratio
+      const cs = getComputedStyle(document.documentElement);
+      const vbW = parseFloat(cs.getPropertyValue('--chart-w')) || svg.viewBox.baseVal.width || 1100;
+      const vbH = parseFloat(cs.getPropertyValue('--chart-h')) || svg.viewBox.baseVal.height || 520;
+      svg.setAttribute('viewBox', `0 0 ${vbW} ${vbH}`);
 
-                    // Add scatter points for AgileX Stock
-                    ctx.fillStyle = 'rgba(255, 140, 0, 0.8)';
-                    agileXData.forEach(point => {
-                        const x = chart.scales.x.getPixelForValue(point.x);
-                        const y = chart.scales.y.getPixelForValue(point.y);
-                        ctx.beginPath();
-                        ctx.arc(x - 60 + Math.random() * 40, y, 4, 0, 2 * Math.PI);
-                        ctx.fill();
-                    });
+      const { width: W, height: H } = svg.viewBox.baseVal;
+      const M = CONFIG.margins;
 
-                    // Add scatter points for DexWrist
-                    ctx.fillStyle = 'rgba(70, 130, 180, 0.8)';
-                    dexWristData.forEach(point => {
-                        const x = chart.scales.x.getPixelForValue(point.x);
-                        const y = chart.scales.y.getPixelForValue(point.y);
-                        ctx.beginPath();
-                        ctx.arc(x + 60 + Math.random() * 40, y, 4, 0, 2 * Math.PI);
-                        ctx.fill();
-                    });
+      const allVals = data.flatMap(d => [d.default + (d.defaultErr||0), d.dex + (d.dexErr||0)]);
+      const maxVal = Math.max(...allVals, 0);
+      const yMax = CONFIG.yMax != null ? CONFIG.yMax : roundUp(maxVal, 10);  // likely 110
+      const y = v => H - M.bottom - (v / yMax) * (H - M.top - M.bottom);
 
-                    // Add error bars
-                    ctx.strokeStyle = '#000000';
-                    ctx.lineWidth = 2;
+      const groups = data.length;
+      const isDesktop = W >= 900;
+      const innerGap = isDesktop ? 8 : 3;         // reduced from 34/18 to 20/10
+      const groupGap = isDesktop ? 40 : 10;        // gap between task groups
 
-                    // Error bars for bars (approximate)
-                    const errorBars = [
-                        {x: 0, y: 2200, error: 850}, // Deep Drawer AgileX
-                        {x: 0, y: 550, error: 150},  // Deep Drawer DexWrist
-                        {x: 1, y: 950, error: 200},  // Unplug Cable AgileX
-                        {x: 1, y: 450, error: 100},  // Unplug Cable DexWrist
-                        {x: 2, y: 550, error: 150},  // Cluttered Fridge AgileX
-                        {x: 2, y: 450, error: 100}   // Cluttered Fridge DexWrist
-                    ];
+      const available = (W - M.left - M.right) - (groups - 1) * groupGap;
+      const idealBar = (available / groups - innerGap) / 2;
+      const barWidth = clamp(idealBar, isDesktop ? 60 : 40, isDesktop ? 95 : 70); // reduced bar width
+      const groupWidth = 2 * barWidth + innerGap;
+      const plotWidth = groups * groupWidth + (groups - 1) * groupGap;
+      const leftStart = M.left + ((W - M.left - M.right - plotWidth) / 2);
 
-                    errorBars.forEach((bar, index) => {
-                        const isAgileX = index % 2 === 0;
-                        const xPos = chart.scales.x.getPixelForValue(bar.x) + (isAgileX ? -60 : 60);
-                        const yPos = chart.scales.y.getPixelForValue(bar.y);
-                        const errorTop = chart.scales.y.getPixelForValue(bar.y + bar.error);
-                        const errorBottom = chart.scales.y.getPixelForValue(bar.y - bar.error);
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
 
-                        // Vertical line
-                        ctx.beginPath();
-                        ctx.moveTo(xPos, errorTop);
-                        ctx.lineTo(xPos, errorBottom);
-                        ctx.stroke();
+      // GRID + AXES
+      const grid = lineGroup('grid');
+      const axis = lineGroup('axis');
+      svg.append(grid, axis);
 
-                        // Top cap
-                        ctx.beginPath();
-                        ctx.moveTo(xPos - 8, errorTop);
-                        ctx.lineTo(xPos + 8, errorTop);
-                        ctx.stroke();
+      // Y grid & labels every 20
+      const step = 20;
+      for(let t=0; t<=yMax; t+=step){
+        const yy = y(t);
+        grid.appendChild(line(M.left, yy, W - M.right, yy));
+        const lbl = text(M.left - 12, yy + 5, t.toFixed(0), 'end');
+        lbl.setAttribute('class','axis');
+        svg.appendChild(lbl);
+      }
+      // axes
+      axis.appendChild(line(M.left, M.top, M.left, H - M.bottom));
+      axis.appendChild(line(M.left, H - M.bottom, W - M.right, H - M.bottom));
 
-                        // Bottom cap
-                        ctx.beginPath();
-                        ctx.moveTo(xPos - 8, errorBottom);
-                        ctx.lineTo(xPos + 8, errorBottom);
-                        ctx.stroke();
+      // Y axis title
+      const yTitle = text(M.left - 48, M.top - 14, 'Trajectory Length (s)', 'start');
+      yTitle.setAttribute('class','y-title');
+      svg.appendChild(yTitle);
 
-                        // Center dot
-                        ctx.fillStyle = '#000000';
-                        ctx.beginPath();
-                        ctx.arc(xPos, yPos, 3, 0, 2 * Math.PI);
-                        ctx.fill();
-                    });
-                }
-            }]
-        });
+      const barsGroup = group();
+      svg.appendChild(barsGroup);
 
+      data.forEach((d,i)=>{
+        const gx = leftStart + i * (groupWidth + groupGap);
 
-    </script>
+        // Default (blue, left bar)
+        const aX = gx;
+        const aY = y(d.default);
+        const aH = (H - M.bottom) - aY;
+        const barA = rect(aX, aY, barWidth, aH, 'var(--series-a)');
+        barA.classList.add('bar'); barA.style.setProperty('--d', (100*i)+'ms');
+        barsGroup.appendChild(barA);
+
+        // DexWrist (orange, right bar)
+        const bX = gx + barWidth + innerGap;
+        const bY = y(d.dex);
+        const bH = (H - M.bottom) - bY;
+        const barB = rect(bX, bY, barWidth, bH, 'var(--series-b)');
+        barB.classList.add('bar'); barB.style.setProperty('--d', (100*i + 140)+'ms');
+        barsGroup.appendChild(barB);
+
+        // Shared group label with subtext
+        const groupCenter = gx + groupWidth/2;
+        barsGroup.appendChild(groupTextLabel(groupCenter, d.label, d.sub));
+
+        // Error bars
+        if (Number.isFinite(d.defaultErr)) barsGroup.appendChild(errorBar(aX, y, barWidth, d.default, d.defaultErr));
+        if (Number.isFinite(d.dexErr))     barsGroup.appendChild(errorBar(bX, y, barWidth, d.dex,     d.dexErr));
+
+        // Value labels above error bars for BOTH bars
+        const aErr = Number.isFinite(d.defaultErr) ? d.defaultErr : 0;
+        const bErr = Number.isFinite(d.dexErr) ? d.dexErr : 0;
+        const aTop = y(d.default + aErr);
+        const bTop = y(d.dex + bErr);
+        barsGroup.appendChild(valueLabel(aX + barWidth/2, aTop - 8, d.default.toFixed(1)));
+        barsGroup.appendChild(valueLabel(bX + barWidth/2, bTop - 8, d.dex.toFixed(1)));
+
+      });
+
+      // --- helpers ---
+      function group(){ return document.createElementNS('http://www.w3.org/2000/svg','g'); }
+      function lineGroup(cls){ const g=group(); g.setAttribute('class',cls); return g; }
+      function line(x1,y1,x2,y2){ const el = document.createElementNS('http://www.w3.org/2000/svg','line');
+        el.setAttribute('x1',x1); el.setAttribute('y1',y1); el.setAttribute('x2',x2); el.setAttribute('y2',y2); return el; }
+      function rect(x,y,w,h,fill){ const el = document.createElementNS('http://www.w3.org/2000/svg','rect');
+        el.setAttribute('x',x); el.setAttribute('y',y); el.setAttribute('width',w); el.setAttribute('height',h);
+        el.setAttribute('rx',6); el.setAttribute('ry',6); el.setAttribute('fill',fill); return el; }
+      function text(x,y,t,anchor='start'){ const el=document.createElementNS('http://www.w3.org/2000/svg','text');
+        el.setAttribute('x',x); el.setAttribute('y',y); el.setAttribute('text-anchor',anchor); el.textContent=t; return el; }
+      function clamp(v,lo,hi){ return Math.max(lo, Math.min(hi,v)); }
+      function roundUp(n, step){ if(!isFinite(n)||n<=0) return step||10; const s=step||10; return Math.ceil(n/s)*s; }
+
+      function valueLabel(cx, yTop, txt){
+        const t = text(cx, yTop, txt, 'middle');
+        t.setAttribute('class','value-label');
+        return t;
+      }
+
+      function errorBar(xBar, yFn, barW, val, err){
+        const g = group(); g.setAttribute('class','err');
+        const centerX = xBar + barW/2;
+        const topY = yFn(val + err), botY = yFn(val - err);
+        g.appendChild(line(centerX, topY, centerX, botY));          // vertical
+        g.appendChild(line(centerX-10, topY, centerX+10, topY));    // top cap
+        g.appendChild(line(centerX-10, botY, centerX+10, botY));    // bottom cap
+        return g;
+      }
+
+      function groupTextLabel(cx, label, sublabel){
+        const ns="http://www.w3.org/2000/svg";
+        const t=document.createElementNS(ns,'text');
+        t.setAttribute('x',cx); t.setAttribute('y',H - M.bottom + 32);
+        t.setAttribute('text-anchor','middle'); t.setAttribute('class','cat-label');
+
+        const t1=document.createElementNS(ns,'tspan'); t1.setAttribute('x',cx);
+        t1.setAttribute('dy',0); t1.textContent=label; t.appendChild(t1);
+
+        if(sublabel){
+          const t2=document.createElementNS(ns,'tspan'); t2.setAttribute('x',cx);
+          t2.setAttribute('dy',22); t2.setAttribute('fill','#555'); t2.setAttribute('font-size','1em');
+          t2.textContent=sublabel; t.appendChild(t2);
+        }
+        return t;
+      }
+    })();
+
+    /* Animate when in view */
+    (function(){
+      const svg = document.getElementById('chartSvg');
+      const go = () => svg.classList.add('in-view');
+      if('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{ if(e.isIntersecting){ go(); io.unobserve(e.target); }});
+        }, { threshold: .35 });
+        io.observe(svg);
+      }else{
+        window.addEventListener('load', go);
+      }
+    })();
+
+    /* Light reflow on resize to keep labels crisp */
+    window.addEventListener('resize', ()=>{
+      const svg=document.getElementById('chartSvg');
+      svg.style.opacity='0.99'; requestAnimationFrame(()=> svg.style.opacity='1');
+    });
+  </script>
 </body>
 </html>

@@ -14,6 +14,31 @@
       font-size: 12px;
       font-weight: bold;
     }
+
+    /* Teleop split: 35% left, 65% right */
+    .teaser .teaser-gifs.teleop-split {
+      align-items: stretch;
+      flex-wrap: nowrap;
+      /* keep side-by-side */
+      gap: 0;
+      /* avoid overflow from gap */
+    }
+
+    .teaser .teaser-gifs.teleop-split .gif-item {
+      flex: 0 0 auto;
+      min-width: 0;
+      /* override global min-width so basis can apply */
+    }
+
+    .teaser .teaser-gifs.teleop-split .gif-item.teleop-left {
+      flex: 0 0 35%;
+      max-width: 35%;
+    }
+
+    .teaser .teaser-gifs.teleop-split .gif-item.teleop-right {
+      flex: 0 0 65%;
+      max-width: 65%;
+    }
   </style>
 
   <meta charset="utf-8">
@@ -254,18 +279,62 @@
       <div class="hero-body">
         <h1 class="section-title">More efficient and intuitive teleoperation in constrained, human-centric environments
           due to its human-level wrist dexterity</h1>
-        <div class="teaser-gifs">
-          <div class="gif-item">
-            <img src="static/images/teleoptable.png" alt="Teleoperation Table" style="width: 80%">
+        <div class="teaser-gifs teleop-split">
+          <div class="gif-item teleop-left">
+            <img src="static/images/teleoptable.png" alt="Teleoperation Table" style="width: 100%">
             <p style="font-size:1.25em">More data efficient: Fewer environment resets required and less overall human
               teleoperator time in constrained spaces.</p>
           </div>
-          <div class="gif-item">
-            <img src="static/images/transparent_teleop_figure.png" alt="Teleoperation Figure">
+          <div class="gif-item teleop-right">
+            <iframe id="teleopChartFrame" src="teleop.html" width="100%" style="border:0; overflow:hidden; height:570px;" frameborder="0" scrolling="no"></iframe>
             <p style="font-size:1.25em">More intuitive: DexWrist's human-like kinematics and design collect shorter
               trajectories and more natural behavior for manipulation in constrained, human-centric environments.</p>
           </div>
         </div>
+        <script>
+          (function () {
+            function resizeFrameToDoc() {
+              var f = document.getElementById('teleopChartFrame');
+              if (!f) return;
+              try {
+                var doc = f.contentDocument || f.contentWindow.document;
+                if (doc) {
+                  var h = Math.max(
+                    doc.documentElement.scrollHeight,
+                    doc.body ? doc.body.scrollHeight : 0
+                  );
+                  if (h && !isNaN(h)) f.style.height = h + 'px';
+                }
+              } catch (e) {
+                /* cross-origin/file:// may block access; rely on postMessage instead */
+              }
+            }
+
+            window.addEventListener('message', function (e) {
+              var d = e.data || {};
+              var f = document.getElementById('teleopChartFrame');
+              if (!f || e.source !== (f.contentWindow || f)) return;
+              if (d.type === 'teleop-chart-height' && typeof d.height === 'number') {
+                f.style.height = d.height + 'px';
+              }
+            });
+
+            var frame = document.getElementById('teleopChartFrame');
+            frame.addEventListener('load', function () {
+              resizeFrameToDoc();
+              if (frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'request-height' }, '*');
+              }
+            });
+
+            window.addEventListener('resize', function () {
+              if (frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'request-height' }, '*');
+              }
+              resizeFrameToDoc();
+            });
+          })();
+        </script>
       </div>
     </div>
   </section>
