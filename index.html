@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <style>
-      .speed-indicator {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+    .speed-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
   </style>
 
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriately -->
-  <meta name="description" content="DexWrist: A Robotic Wrist for Constrained and Dynamic Manipulation. Learn about its innovative design and capabilities.">
-  <meta property="og:title" content="DexWrist: A Robotic Wrist for Dynamic Manipulation"/>
-  <meta property="og:description" content="Discover the DexWrist, a robotic wrist designed for constrained and dynamic manipulation tasks with human-like dexterity."/>
-  <meta property="og:url" content="https://dexwrist.csail.mit.edu"/>
+  <meta name="description"
+    content="DexWrist: A Robotic Wrist for Constrained and Dynamic Manipulation. Learn about its innovative design and capabilities.">
+  <meta property="og:title" content="DexWrist: A Robotic Wrist for Dynamic Manipulation" />
+  <meta property="og:description"
+    content="Discover the DexWrist, a robotic wrist designed for constrained and dynamic manipulation tasks with human-like dexterity." />
+  <meta property="og:url" content="https://dexwrist.csail.mit.edu" />
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <meta property="og:image" content="static/images/lab_logo_final.ico" />
-  <meta property="og:image:width" content="600"/>
-  <meta property="og:image:height" content="600"/>
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
 
 
   <meta name="twitter:title" content="DexWrist: A Robotic Wrist for Dynamic Manipulation">
-  <meta name="twitter:description" content="Explore the DexWrist, a robotic wrist enabling dynamic tasks with human-like dexterity.">
+  <meta name="twitter:description"
+    content="Explore the DexWrist, a robotic wrist enabling dynamic tasks with human-like dexterity.">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="static/images/lab_logo_final.ico">
   <meta name="twitter:card" content="summary_large_image">
@@ -40,15 +44,13 @@
   <title>DexWrist</title>
   <link rel="icon" type="image/x-icon" href="static/images/lab_logo_final.ico">
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -58,10 +60,12 @@
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
 </head>
+
 <body>
 
 
-  <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/images/background.gif'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <section class="hero"
+    style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/images/background.gif'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -71,37 +75,41 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <span class="author-block"><a href="https://mfpeticco.github.io/about.html" target="_blank">Martin Peticco</a><sup>1</sup>,</span>
-                <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank">Gabriella Ulloa</a><sup>1</sup>,</span>
+                <span class="author-block"><a href="https://mfpeticco.github.io/about.html" target="_blank">Martin
+                    Peticco</a><sup>1</sup>,</span>
+                <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank">Gabriella
+                  Ulloa</a><sup>1</sup>,</span>
 
-                  <span class="author-block">John Marangola<sup>1</sup>,</span>
-                  <a href="https://www.nitishdashora.com/" target="_blank"><span class="author-block">Nitish Dashora<sup>1</sup>,</span></a>
-                  <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1</sup></span>
+              <span class="author-block">John Marangola<sup>1</sup>,</span>
+              <a href="https://www.nitishdashora.com/" target="_blank"><span class="author-block">Nitish
+                  Dashora<sup>1</sup>,</span></a>
+              <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1</sup></span>
 
-                  </div>
+            </div>
 
-                  <!-- <div class="is-size-5 publication-authors">
+            <!-- <div class="is-size-5 publication-authors">
                     <span class="author-block">MIT<sup>1</sup>
                       <br>(Under Review)</span>
                     <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                   </div> -->
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">
-                      <span>MIT<sup>1</sup></span>
-                      <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        <img src="static/images/lab_logo.png" alt="Improbable AI Lab" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
-                        <img src="static/images/mit.jpg" alt="MIT Logo" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;">
-                      </div>
-                      (Under Review)
-                    </span>
-                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
-                  </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <span>MIT<sup>1</sup></span>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                  <img src="static/images/lab_logo.png" alt="Improbable AI Lab" class="affiliation-logo"
+                    style="height: 1.5vw; min-height: 12px; max-height: 32px;">
+                  <!-- <img src="static/images/mit.jpg" alt="MIT Logo" class="affiliation-logo" style="height: 1.5vw; min-height: 12px; max-height: 32px;"> -->
+                </div>
+                (Under Review)
+              </span>
+              <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+            </div>
 
-                  <div class="column has-text-centered">
+            <div class="column has-text-centered">
 
-                  <!-- Arxiv PDF link -->
-                    <!-- <div class="publication-links">
+              <!-- Arxiv PDF link -->
+              <!-- <div class="publication-links">
                       <span class="link-block">
                         <a href="https://arxiv.org/abs/2507.01008" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
@@ -112,8 +120,8 @@
                       </a>
                     </span> -->
 
-                    <!-- Supplementary PDF link -->
-                    <!-- <span class="link-block">
+              <!-- Supplementary PDF link -->
+              <!-- <span class="link-block">
                       <a href="static/pdfs/supplementary_material.pdf" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
@@ -123,21 +131,20 @@
                     </a>
                   </span> -->
 
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code (Coming Soon)
-                    </span>
-                  </a>
-                </span>
+              <!-- Github link -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)
+                  </span>
+                </a>
+              </span>
 
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+              <!-- ArXiv abstract Link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
@@ -146,118 +153,131 @@
                 </a>
               </span>
             </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif; margin-top: 20px;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to Purchase a DexWrist! </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084"
+              target="_blank"
+              style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif; margin-top: 20px;"
+              onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'"
+              onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to
+              Purchase a DexWrist! </a>
 
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-
-<!-- Why dexwrist section-->
-<section class="section hero is-small is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="content has-text-justified">
-        <h1 class="section-title">Motivation</h1>
-        <div style="font-size: 2em; color: #666; line-height: 1; margin-bottom: 10px;">"</div>
-        <div style="font-size: 1.4em; margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
-          <!-- Recent prosthetics investigations, however, have shown that increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability.<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a> -->
-          <p>The spatial orientation of an end-effector such as a hand or a gripper is closely tied to its ability to perform a desired task [...] Yet both the academic and industrial research communities have tended to place more focus on hand/gripper development than that of wrist systems. </p>
-          
-          <p>Recent prosthetics investigations, however, have shown that <b>increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability. </b> <a href="https://ieexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a></p>
-        </div>
-        <div style="font-size: 2em; color: #666; line-height: 1; text-align: right;">"</div>
-      </div>
-      </div>
     </div>
-  </div>
-</section>
-
-<!-- Teaser Section 1 -->
-<section class="section teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h1 class="section-title">DexWrist enables highly dynamic and contact-rich tasks</h1>
-      <div class="teaser-gifs">
-        <div class="gif-item">
-          <img src="static/images/bottleflip.gif" alt="Bottle Flip">
-          <p>Demonstration (1x Speed)</p>
-        </div>
-        <div class="gif-item">
-          <img src="static/images/agilewipe.gif" alt="Agile Wipe">
-          <p>Demonstration (1x Speed)</p>
-        </div>
-        <div class="gif-item">
-          <img src="static/images/robustwipe.gif" alt="Robust Wipe">
-          <p>Rollout (1x Speed)</p>
-        </div>
-      </div>
-      <br>
-      <h2 class="subtitle has-text-centered">
-        <b>(1X Speed)</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
-      </h2>
-    </div>
-  </div>
-</section>
-
-<!-- Teaser Section 2 -->
-<section class="section teaser has-background-light">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h1 class="section-title">DexWrist enables constrained-space manipulation</h1>
-      <div class="teaser-gifs">
-        <div class="gif-item">
-          <img src="static/images/fridgepick.gif" alt="Fridge Pick">
-          <p>Demonstration (1x Speed)</p>
-        </div>
-        <div class="gif-item">
-          <img src="static/images/cableunplug.gif" alt="Cable Unplug">
-          <p>Demonstration (1x Speed)</p>
-        </div>
-        <div class="gif-item">
-          <img src="static/images/drawerpick.png" alt="Drawer Pick">
-          <p>Demonstration</p>
-        </div>
-      </div>
-      <br>
-      <h2 class="subtitle has-text-centered">
-        <b>(1X Speed)</b> DexWrist enables manipulation in constrained spaces where traditional wrists fail.
-      </h2>
-    </div>
-  </div>
-</section>
+  </section>
 
 
-<section class="section teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h1 class="section-title">More efficient and intuitive teleoperation in constrained, human-centric environments due to its human-level wrist dexterity</h1>
-      <div class="teaser-gifs">
-        <div class="gif-item">
-          <img src="static/images/teleoptable.png" alt="Teleoperation Table"  style="width: 80%">
-          <p style="font-size:1.25em">More data efficient: Fewer environment resets required and less overall human teleoperator time in constrained spaces.</p>
-        </div>
-        <div class="gif-item">
-          <img src="static/images/transparent_teleop_figure.png" alt="Teleoperation Figure">
-          <p style="font-size:1.25em">More intuitive: DexWrist's human-like kinematics and design collect shorter trajectories and more natural behavior for manipulation in constrained, human-centric environments.</p>
+
+  <!-- Why dexwrist section-->
+  <section class="section hero is-small is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="content has-text-justified">
+          <h1 class="section-title">Motivation</h1>
+          <div style="font-size: 2em; color: #666; line-height: 1; margin-bottom: 10px;">"</div>
+          <div style="font-size: 1.4em; margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
+            <!-- Recent prosthetics investigations, however, have shown that increased dexterity in wrist prostheses may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist capability.<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352" target="_blank" style="color: blue;"> [1] </a> -->
+            <p>The spatial orientation of an end-effector such as a hand or a gripper is closely tied to its ability to
+              perform a desired task [...] Yet both the academic and industrial research communities have tended to
+              place more focus on hand/gripper development than that of wrist systems. </p>
+
+            <p>Recent prosthetics investigations, however, have shown that <b>increased dexterity in wrist prostheses
+                may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist
+                capability. </b> <a href="https://ieexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352"
+                target="_blank" style="color: blue;"> [1] </a></p>
+          </div>
+          <div style="font-size: 2em; color: #666; line-height: 1; text-align: right;">"</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- <section class="section hero is-light">
+  <!-- Teaser Section 1 -->
+  <section class="section teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h1 class="section-title">DexWrist enables highly dynamic and contact-rich tasks</h1>
+        <div class="teaser-gifs">
+          <div class="gif-item">
+            <img src="static/images/bottleflip.gif" alt="Bottle Flip">
+            <p>Demonstration (1x Speed)</p>
+          </div>
+          <div class="gif-item">
+            <img src="static/images/agilewipe.gif" alt="Agile Wipe">
+            <p>Demonstration (1x Speed)</p>
+          </div>
+          <div class="gif-item">
+            <img src="static/images/robustwipe.gif" alt="Robust Wipe">
+            <p>Rollout (1x Speed)</p>
+          </div>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+          <b>(1X Speed)</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser Section 2 -->
+  <section class="section teaser has-background-light">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h1 class="section-title">DexWrist enables constrained-space manipulation</h1>
+        <div class="teaser-gifs">
+          <div class="gif-item">
+            <img src="static/images/fridgepick.gif" alt="Fridge Pick">
+            <p>Demonstration (1x Speed)</p>
+          </div>
+          <div class="gif-item">
+            <img src="static/images/cableunplug.gif" alt="Cable Unplug">
+            <p>Demonstration (1x Speed)</p>
+          </div>
+          <div class="gif-item">
+            <img src="static/images/drawerpick.png" alt="Drawer Pick">
+            <p>Demonstration</p>
+          </div>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+          <b>(1X Speed)</b> DexWrist enables manipulation in constrained spaces where traditional wrists fail.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h1 class="section-title">More efficient and intuitive teleoperation in constrained, human-centric environments
+          due to its human-level wrist dexterity</h1>
+        <div class="teaser-gifs">
+          <div class="gif-item">
+            <img src="static/images/teleoptable.png" alt="Teleoperation Table" style="width: 80%">
+            <p style="font-size:1.25em">More data efficient: Fewer environment resets required and less overall human
+              teleoperator time in constrained spaces.</p>
+          </div>
+          <div class="gif-item">
+            <img src="static/images/transparent_teleop_figure.png" alt="Teleoperation Figure">
+            <p style="font-size:1.25em">More intuitive: DexWrist's human-like kinematics and design collect shorter
+              trajectories and more natural behavior for manipulation in constrained, human-centric environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="section hero is-light">
   <h2 class="title is-4 has-text-centered heading-fixed">
           More efficient and intuitive teleoperation in constrained, human-centric environments
         </h2>
 </section> -->
 
-<!-- Paper abstract -->
-<!-- <section class="section hero is-light">
+  <!-- Paper abstract -->
+  <!-- <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
 <div class="content has-text-justified">
@@ -272,144 +292,158 @@
     </div>
   </div>
 </section> -->
-<!-- End paper abstract -->
+  <!-- End paper abstract -->
 
 
-<section class="section teaser has-background-light">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h1 class="section-title">Reduced horizon length in constrained environments leads to improved success rates for behavioral cloning policies</h1>
-      <!-- Give a safe initial height so the chart is visible even if resize fails -->
-      <iframe id="dpChartFrame" src="dp_chart_new.html" width="100%" style="border:0; overflow:hidden; height:520px;" frameborder="0" scrolling="no"></iframe>
-      <script>
-        (function(){
-          function resizeFrameToDoc() {
-            var f = document.getElementById('dpChartFrame');
-            if (!f) return;
-            try {
-              var doc = f.contentDocument || f.contentWindow.document;
-              if (doc) {
-                var h = Math.max(
-                  doc.documentElement.scrollHeight,
-                  doc.body ? doc.body.scrollHeight : 0
-                );
-                if (h && !isNaN(h)) f.style.height = h + 'px';
+  <section class="section teaser has-background-light">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h1 class="section-title">Reduced horizon length in constrained environments leads to improved success rates for
+          behavioral cloning policies</h1>
+        <!-- Give a safe initial height so the chart is visible even if resize fails -->
+        <iframe id="dpChartFrame" src="dp_chart_new.html" width="100%" style="border:0; overflow:hidden; height:520px;"
+          frameborder="0" scrolling="no"></iframe>
+        <script>
+          (function () {
+            function resizeFrameToDoc() {
+              var f = document.getElementById('dpChartFrame');
+              if (!f) return;
+              try {
+                var doc = f.contentDocument || f.contentWindow.document;
+                if (doc) {
+                  var h = Math.max(
+                    doc.documentElement.scrollHeight,
+                    doc.body ? doc.body.scrollHeight : 0
+                  );
+                  if (h && !isNaN(h)) f.style.height = h + 'px';
+                }
+              } catch (e) {
+                /* cross-origin/file:// may block access; rely on postMessage instead */
               }
-            } catch(e){
-              /* cross-origin/file:// may block access; rely on postMessage instead */
             }
-          }
 
-          window.addEventListener('message', function(e){
-            // Accept messages regardless of origin (works for file:// and different origins)
-            var d = e.data || {};
-            var f = document.getElementById('dpChartFrame');
-            if (!f || e.source !== (f.contentWindow || f)) return;
-            if (d.type === 'dexwrist-chart-height' && typeof d.height === 'number') {
-              f.style.height = d.height + 'px';
-            }
-          });
+            window.addEventListener('message', function (e) {
+              // Accept messages regardless of origin (works for file:// and different origins)
+              var d = e.data || {};
+              var f = document.getElementById('dpChartFrame');
+              if (!f || e.source !== (f.contentWindow || f)) return;
+              if (d.type === 'dexwrist-chart-height' && typeof d.height === 'number') {
+                f.style.height = d.height + 'px';
+              }
+            });
 
-          var frame = document.getElementById('dpChartFrame');
-          frame.addEventListener('load', function(){
-            // Try direct sizing if same-origin
-            resizeFrameToDoc();
-            // Always ask the child to report its height (works cross-origin)
-            if (frame.contentWindow) {
-              frame.contentWindow.postMessage({type:'request-height'}, '*');
-            }
-          });
+            var frame = document.getElementById('dpChartFrame');
+            frame.addEventListener('load', function () {
+              // Try direct sizing if same-origin
+              resizeFrameToDoc();
+              // Always ask the child to report its height (works cross-origin)
+              if (frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'request-height' }, '*');
+              }
+            });
 
-          window.addEventListener('resize', function(){
-            if (frame.contentWindow) {
-              frame.contentWindow.postMessage({type:'request-height'}, '*');
-            }
-            resizeFrameToDoc();
-          });
-        })();
-      </script>
-      
+            window.addEventListener('resize', function () {
+              if (frame.contentWindow) {
+                frame.contentWindow.postMessage({ type: 'request-height' }, '*');
+              }
+              resizeFrameToDoc();
+            });
+          })();
+        </script>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h1 class="section-title">Human-like design of the wrist generates natural behavior during teleoperation resulting in faster task completion</h1>
-      <div class="teaser-gifs">
-        <div class="gif-item">
-          <img src="static/images/policy_speed.png" alt="Policy speed" style="width: 100%; max-width: 500px; height: auto;">
-          <p style="font-size:1.25em">Diffusion policies trained for the DexWrist were <b>3.2x</b> faster at retrieving objects from a cluttered refrigerator than the AgileX + default wrist, and <b>4.9x</b> faster at dynamically wiping a whiteboard.</p>
+  <section class="section teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h1 class="section-title">Human-like design of the wrist generates natural behavior during teleoperation
+          resulting in faster task completion</h1>
+        <div class="teaser-gifs">
+          <div class="gif-item">
+            <img src="static/images/policy_speed.png" alt="Policy speed"
+              style="width: 100%; max-width: 500px; height: auto;">
+            <p style="font-size:1.25em">Diffusion policies trained for the DexWrist were <b>3.2x</b> faster at
+              retrieving objects from a cluttered refrigerator than the AgileX + default wrist, and <b>4.9x</b> faster
+              at dynamically wiping a whiteboard.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
 
- <section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h1 class="section-title">Why DexWrist?</h1>
-        <div class="content has-text-justified">
-          <p>
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h1 class="section-title">Why DexWrist?</h1>
+          <div class="content has-text-justified">
+            <p>
             <ul>
               <li>Enables constrained, dynamic manipulation tasks on any robot arm</li>
               <li>Torque transparency and easily simulatable kinematics enables dynamic policy learning</li>
               <li>Facilitates faster teleoperation for more scalable data collection</li>
               <li>Reduces trajectory lengths, making policy learning more efficient</li>
             </ul>
-          </p>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
+    <div class="container">
       <!-- Paper video. -->
       <!-- <h2 class="title is-3">Video Presentation</h2> -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
 
-        <div class="explainimg">
-          <video poster="" id="video1" autoplay muted loop height="100%">
-            Your video file here
-            <source src="static/videos/WristAnimation.mp4"
-            type="video/mp4">
-          </video>
-        </div>
+          <div class="explainimg">
+            <video poster="" id="video1" autoplay muted loop height="100%">
+              Your video file here
+              <source src="static/videos/WristAnimation.mp4" type="video/mp4">
+            </video>
+          </div>
 
-        <h2 class="explaintext">A novel 2-DOF Parallel Kinematic Mechanism (PKM) achieves <b>human-like kinematics</b> while maintaining a <b>one-to-one mapping</b> between the two actuators and each of their DOF, <b>making teleop and policy learning easier</b>. The final DOF is achieved by mounting the wrist to a motor.</h2>
+          <h2 class="explaintext">A novel 2-DOF Parallel Kinematic Mechanism (PKM) achieves <b>human-like kinematics</b>
+            while maintaining a <b>one-to-one mapping</b> between the two actuators and each of their DOF, <b>making
+              teleop and policy learning easier</b>. The final DOF is achieved by mounting the wrist to a motor.</h2>
 
-        <div class="explainimg">
-          <img src="static/images/gearboxregular.png">
-          <img src="static/images/gearboxexploded.png">
-        </div>
+          <div class="explainimg">
+            <img src="static/images/gearboxregular.png">
+            <img src="static/images/gearboxexploded.png">
+          </div>
 
-        <h2 class="explaintext">Custom Quasi-Direct Drive (QDD) actuators with brushless motors and a 13:1 planetary gearbox allows for <b>dynamic</b> tasks due to its <b>backdriveability and speed</b>, much how humanoid robots achieved dynamic movement using such actuators.</h2>
+          <h2 class="explaintext">Custom Quasi-Direct Drive (QDD) actuators with brushless motors and a 13:1 planetary
+            gearbox allows for <b>dynamic</b> tasks due to its <b>backdriveability and speed</b>, much how humanoid
+            robots achieved dynamic movement using such actuators.</h2>
 
-        <div class="explainimg">
-          <video poster="" id="video1" autoplay muted loop height="100%">
-            Your video file here
-            <source src="static/videos/wristspinfast.mp4"
-            type="video/mp4">
-          </video>
-        </div>
+          <div class="explainimg">
+            <video poster="" id="video1" autoplay muted loop height="100%">
+              Your video file here
+              <source src="static/videos/wristspinfast.mp4" type="video/mp4">
+            </video>
+          </div>
 
-        <h2 class="explaintext">[1x Speed] Finally, DexWrist has a large workspace and fits on most commercial robotic arms (AgileX shown). This makes fast, dynamic tasks possible on any arm.</h2>
+          <h2 class="explaintext">[1x Speed] Finally, DexWrist has a large workspace and fits on most commercial robotic
+            arms (AgileX shown). This makes fast, dynamic tasks possible on any arm.</h2>
         </div>
       </div>
     </div>
     <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084" target="_blank" style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif;" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to Purchase a DexWrist!</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084"
+        target="_blank"
+        style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif;"
+        onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'"
+        onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to Purchase a
+        DexWrist!</a>
     </div>
-</section>
+  </section>
 
 
 
-<!-- <section class="hero is-small is-light">
+  <!-- <section class="hero is-small is-light">
   <div class="hero-body">
 
   </div>
@@ -421,12 +455,12 @@
 
   </div></div> -->
 
-<iframe src="unfinished_bom.html" width="100%" height="400px" frameborder="0" scrolling="no"></iframe>
+  <iframe src="unfinished_bom.html" width="100%" height="400px" frameborder="0" scrolling="no"></iframe>
 
 
 
-<!-- Youtube video -->
-<!-- <section class="hero is-small is-light">
+  <!-- Youtube video -->
+  <!-- <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
       Paper video.
@@ -443,11 +477,11 @@
     </div>
   </div>
 </section> -->
-<!-- End youtube video -->
+  <!-- End youtube video -->
 
 
-<!-- Video carousel -->
-<!-- <section class="hero is-small">
+  <!-- Video carousel -->
+  <!-- <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">Another Carousel</h2>
@@ -477,37 +511,38 @@
     </div>
   </div>
 </section> -->
-<!-- End video carousel -->
+  <!-- End video carousel -->
 
 
 
 
 
 
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <h2 class="title is-4 has-text-centered heading-fixed">Poster</h2>
-    <div class="container" style="text-align: center;">
-      <iframe src="https://drive.google.com/file/d/1ofqW1u5Tn6R8qa2SEs_r3V4QvRsBEuId/preview" width="640" height="480" allow="autoplay"></iframe>
+  <!-- Paper poster -->
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <h2 class="title is-4 has-text-centered heading-fixed">Poster</h2>
+      <div class="container" style="text-align: center;">
+        <iframe src="https://drive.google.com/file/d/1ofqW1u5Tn6R8qa2SEs_r3V4QvRsBEuId/preview" width="640" height="480"
+          allow="autoplay"></iframe>
       </div>
     </div>
-  </div>
-<!--End paper poster -->
+    </div>
+    <!--End paper poster -->
 
 
-<!--BibTex citation -->
-  <!-- <section class="section" id="BibTeX">
+    <!--BibTex citation -->
+    <!-- <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>BibTex Code Here</code></pre>
     </div>
 </section> -->
-<!--End BibTex citation -->
+    <!--End BibTex citation -->
 
 
 
-  <!-- <footer class="footer">
+    <!-- <footer class="footer">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -523,24 +558,28 @@
   </div>
 </footer> -->
 
-<!-- Statcounter tracking code -->
+    <!-- Statcounter tracking code -->
 
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
 
-  </body>
-  </html>
-  </html>
-  </div>
+</body>
+
+</html>
+
+</html>
+</div>
 </footer> -->
 
 <!-- Statcounter tracking code -->
 
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
-    <!-- End of Statcounter Code -->
+<!-- End of Statcounter Code -->
 
-  </body>
-  </html>
-  </html>
+</body>
+
+</html>
+
+</html>
