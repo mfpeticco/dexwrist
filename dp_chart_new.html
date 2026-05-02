@@ -7,9 +7,9 @@
   <title>Animated Bar Chart – DexWrist</title>
   <style>
     :root {
-      --series-a: #ff7f50;
+      --series-a: #87cefa;
       /* Default Wrist */
-      --series-b: #87cefa;
+      --series-b: #ff7f50;
       /* DexWrist (Ours) */
       --axis: #d0d0d0;
       --grid: #2b2b2b;
@@ -20,18 +20,18 @@
 
     body {
       margin: 0;
+      padding: 0;
       background: var(--bg);
       color: var(--text);
       font-family: var(--font);
+      overflow-x: hidden;
     }
 
-    /* === Section wrapper you can drop anywhere === */
+    /* === Section wrapper === */
     .chart-section {
       max-width: 900px;
-      margin: 60px auto 0;
-      /* remove bottom margin */
-      padding: 24px 18px 0;
-      /* remove bottom padding */
+      margin: 0 auto;
+      padding: 0 18px;
     }
 
     .chart-title {
@@ -212,7 +212,7 @@
 <body>
 
   <section class="chart-section" id="dexwrist-chart">
-    <h2 class="chart-title">Policy Success Rate (%)</h2>
+    <h2 class="chart-title">Diffusion Policy Success Rate Comparison</h2>
     <!-- <p class="chart-subtitle">Default Wrist vs DexWrist (Ours)</p> -->
 
     <div class="chart-wrap">
@@ -269,7 +269,7 @@
     const CONFIG = {
       yMax: null,        // null = auto from data; or set (e.g., 80)
       yTicks: 5,         // number of horizontal grid lines
-      margins: { top: 28, right: 20, bottom: 100, left: 56 }
+      margins: { top: 28, right: 20, bottom: 70, left: 56 }
     };
 
     /* ===== Chart renderer (no dependencies) ===== */

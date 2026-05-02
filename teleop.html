@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Human Teleoperation Length Comparison – DexWrist</title>
+  <title>Human Teleoperation Duration Comparison – DexWrist</title>
   <style>
     :root {
-      --series-a: #ff7f50;
+      --series-a: #87cefa;
       /* Default Wrist */
-      --series-b: #87cefa;
+      --series-b: #ff7f50;
       /* DexWrist (Ours) */
       --axis: #d0d0d0;
       --grid: #2b2b2b;
@@ -72,7 +72,7 @@
 </head>
 <body>
   <section class="chart-section" id="dexwrist-chart">
-    <h2 class="chart-title">Human Teleoperation Length Comparison</h2>
+    <h2 class="chart-title">Human Teleoperation Duration Comparison</h2>
 
     <div class="chart-wrap">
       <div class="legend" role="list" aria-hidden="false">
@@ -81,8 +81,8 @@
       </div>
 
       <svg id="chartSvg" viewBox="0 0 1100 520" aria-labelledby="chartTitle chartDesc" role="img">
-        <title id="chartTitle">Human Teleoperation Length Comparison</title>
-        <desc id="chartDesc">Grouped bar chart comparing trajectory lengths for Default Wrist vs DexWrist across tasks.</desc>
+        <title id="chartTitle">Human Teleoperation Duration Comparison</title>
+        <desc id="chartDesc">Grouped bar chart comparing task durations for Default Wrist vs DexWrist across tasks.</desc>
       </svg>
     </div>
   </section>
@@ -90,10 +90,10 @@
   <script>
     /* ===== DATA to match the figure ===== */
     const data = [
-      { label: "Deep Drawer",           sub: "(AgileX)", default: 71.67,   dex: 18.33, defaultErr: 30.0,  dexErr: 5.0  },
-      { label: "Unplug Cable",          sub: "(AgileX)", default: 30.10,   dex: 14.32, defaultErr: 10.0,  dexErr: 4.67 },
-      { label: "Cluttered Fridge",      sub: "(AgileX)", default: 18.57,   dex: 14.97, defaultErr: 7.0,   dexErr: 3.33 },
-      { label: "Whiteboard Erase",      sub: "(UR3e)",   default: 13.6814, dex: 7.29,  defaultErr: 7.127, dexErr: 1.98 },
+      { label: "Deep Drawer",           sub: "(AgileX)", default: 37.3, dex: 17.2, defaultErr: 5.0, dexErr: 1.0 },
+      { label: "Unplug Cable",          sub: "(AgileX)", default: 31.9, dex: 15.2, defaultErr: 3.0, dexErr: 1.5 },
+      { label: "Cluttered Fridge",      sub: "(AgileX)", default: 18.8, dex: 14.2, defaultErr: 2.0, dexErr: 0.5 },
+      { label: "Whiteboard Erase",      sub: "(UR3e)",   default: 13.7, dex: 7.3,  defaultErr: 1.3, dexErr: 0.3 },
     ];
 
     const CONFIG = {
@@ -151,7 +151,7 @@
       axis.appendChild(line(M.left, H - M.bottom, W - M.right, H - M.bottom));
 
       // Y axis title
-      const yTitle = text(M.left - 48, M.top - 14, 'Trajectory Length (s)', 'start');
+      const yTitle = text(M.left - 48, M.top - 14, 'Task Duration (s)', 'start');
       yTitle.setAttribute('class','y-title');
       svg.appendChild(yTitle);
 
@@ -261,6 +261,28 @@
       const svg=document.getElementById('chartSvg');
       svg.style.opacity='0.99'; requestAnimationFrame(()=> svg.style.opacity='1');
     });
+
+    /* Auto-resize messaging to parent */
+    (function () {
+      function computeHeight() {
+        return Math.max(
+          document.documentElement.scrollHeight,
+          document.body ? document.body.scrollHeight : 0
+        );
+      }
+      function postHeight() {
+        try { parent.postMessage({ type: 'teleop-chart-height', height: computeHeight() }, '*'); } catch (e) { }
+      }
+      window.addEventListener('load', function () {
+        requestAnimationFrame(postHeight);
+        setTimeout(postHeight, 300);
+        setTimeout(postHeight, 1200);
+      });
+      window.addEventListener('resize', function () { requestAnimationFrame(postHeight); });
+      window.addEventListener('message', function (e) {
+        if ((e.data || {}).type === 'request-height') postHeight();
+      });
+    })();
   </script>
 </body>
 </html>
