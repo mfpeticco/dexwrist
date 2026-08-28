@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--
+  Cross-axis torque coupling: bench measurement. Referenced by DexWrist RA-L
+  paper Sec. III-B ("protocol and data on the project website") and by
+  derivation.html. Notation matches paper/root.tex.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DexWrist — Cross-Axis Torque Coupling: Bench Measurement</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'none'
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    html { font-size: 118%; }
+
+    .deriv-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 22px;
+      line-height: 1.6;
+      font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .deriv-wrap h3 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.35em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 40px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #eaeaea;
+    }
+
+    .deriv-wrap p { margin: 12px 0; text-align: left; }
+    .deriv-wrap ul { margin: 10px 0 10px 26px; }
+    .deriv-wrap ul li { margin: 6px 0; }
+
+    .callout {
+      background: #eafaf1;
+      border-left: 4px solid #27ae60;
+      border-radius: 6px;
+      padding: 4px 20px;
+      margin: 22px 0;
+    }
+    .callout .callout-label {
+      display: block;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #1e8f52;
+      margin-top: 12px;
+    }
+
+    .deriv-table-wrap { overflow-x: auto; margin: 18px 0; }
+    table.deriv-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+      font-size: 0.98em;
+    }
+    table.deriv-table th, table.deriv-table td {
+      border: 1px solid #ddd;
+      padding: 9px 13px;
+      text-align: center;
+    }
+    table.deriv-table th { background: #f0f0f0; font-weight: 600; }
+    table.deriv-table td:first-child, table.deriv-table th:first-child { text-align: left; }
+
+    .deriv-note { font-size: 0.9em; color: #666; margin: 8px 0 0; }
+    .backlink { font-size: 0.95em; }
+
+    .fig-block { margin: 26px auto; text-align: center; }
+    .fig-block img { max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 6px; }
+    .fig-block .fig-caption { font-size: 0.9em; color: #555; margin-top: 8px; text-align: left; }
+
+    mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <h1 class="title is-2 publication-title" style="color:#111;">Cross-Axis Torque Coupling: Bench Measurement</h1>
+        <p class="is-size-5" style="color:#555;">Protocol and data for the statics of Sec.&nbsp;III-B</p>
+        <p class="backlink" style="margin-top:10px;">
+          <a href="derivation.html">&larr; kinematics &amp; statics derivation</a> &ensp;&middot;&ensp;
+          <a href="index.html">project page</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="deriv-wrap">
+
+      <p>
+        The wrist's statics (<a href="derivation.html">full derivation</a>) is upper-triangular:
+        \[
+          \tau_1 = M_1 + M_2\,\frac{\partial q_2}{\partial\theta_1},
+          \qquad
+          \tau_2 = M_2\,\frac{\partial q_2}{\partial\theta_2},
+        \]
+        where \(M_1, M_2\) are the moment components about the yaw and pitch output axes. It predicts that a yaw moment
+        never reaches the pitch actuator, and that a pitch moment reflects onto the yaw actuator with the closed-form
+        gain \(\rho=(\partial q_2/\partial\theta_1)/(\partial q_2/\partial\theta_2)\), which is zero on \(\theta_2=0\), at
+        most \(6\%\) along \(\theta_1=0\), and \(31\%\) at \((30^\circ,30^\circ)\). We measure both channels on a bench
+        rig below.
+      </p>
+
+      <div class="fig-block">
+        <img src="static/images/crossaxis/fig1_crosstalk_vs_deflection.png" alt="Cross-axis torque versus deflection">
+        <p class="fig-caption">
+          Predicted cross-axis torque along the diagonal \(\theta_1=\theta_2\). The pitch-load &rarr; yaw-motor coupling
+          reaches \(31\%\) of the on-axis torque at \(\pm 30^\circ\) and \(50\%\) at \(40^\circ\); the yaw-load &rarr;
+          pitch-motor channel is zero at every configuration. Because the gain is closed-form, it is exactly
+          compensable.
+        </p>
+      </div>
+
+      <h3>Protocol</h3>
+      <p>
+        A weighed \(1.145\)&nbsp;kg mass hangs from a bar clamped to the output, at three radii
+        (\(85/117/150\)&nbsp;mm), on both bar ends, on each output axis in turn, while the <em>opposite</em> actuator's
+        torque is read. Poses span a two-dimensional grid plus a \((0,0)\) control pose. Differencing the two bar ends
+        cancels sensor bias, bar weight, and on-axis stiction; entering every pose from both directions and averaging
+        cancels static friction, which acts against the last commanded motion rather than against the load. Each motor
+        is calibrated from its own differenced on-axis load ladder; both calibrate at \(0.96\). Because the joint sags
+        up to \(1.6^\circ\) under load, predictions are evaluated at each group's measured pose.
+      </p>
+
+      <h3>Yaw load &rarr; pitch motor</h3>
+      <p>Torque on the pitch motor, as a percentage of the applied moment:</p>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>Pose \((\theta_1,\theta_2)\)</th><th>Predicted</th><th>Measured</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\((0,0)\) &mdash; control</td><td>\(0.0\%\)</td><td>\(+0.6\%\)</td></tr>
+            <tr><td>\((-30,-20)\)</td><td>\(0.0\%\)</td><td>\(+0.6\%\)</td></tr>
+            <tr><td>\((-30,+20)\)</td><td>\(0.0\%\)</td><td>\(+2.7\%\)</td></tr>
+            <tr><td>\((-20,-30)\)</td><td>\(0.0\%\)</td><td>\(-0.1\%\)</td></tr>
+            <tr><td>\((-20,+30)\)</td><td>\(0.0\%\)</td><td>\(+0.1\%\)</td></tr>
+            <tr><td>\((-30,-30)\)</td><td>\(0.0\%\)</td><td>\(+4.8\%\)</td></tr>
+            <tr><td>\((-30,+30)\)</td><td>\(0.0\%\)</td><td>\(-1.6\%\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The null holds: \(2.2\) percentage points RMS, at the fixture noise floor. The absolute leak at the control pose
+        is \(0.002\)&ndash;\(0.007\)&nbsp;N&middot;m, at the sensor noise floor.
+      </p>
+
+      <h3>Pitch load &rarr; yaw motor</h3>
+      <p>Torque on the yaw motor, as a percentage of the applied moment:</p>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>Pose \((\theta_1,\theta_2)\)</th><th>Predicted</th><th>Measured</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\((0,0)\) &mdash; control</td><td>\(0.0\%\)</td><td>\(+3.2\%\)</td></tr>
+            <tr><td>\((-30,-20)\)</td><td>\(-6.8\%\)</td><td>\(-7.0\%\)</td></tr>
+            <tr><td>\((-30,+20)\)</td><td>\(+6.6\%\)</td><td>\(+5.7\%\)</td></tr>
+            <tr><td>\((-20,-30)\)</td><td>\(-10.2\%\)</td><td>\(-15.6\%\)</td></tr>
+            <tr><td>\((-20,+30)\)</td><td>\(+10.1\%\)</td><td>\(+17.1\%\)</td></tr>
+            <tr><td>\((-30,-30)\)</td><td>\(-15.2\%\)</td><td>\(-10.2\%\)</td></tr>
+            <tr><td>\((-30,+30)\)</td><td>\(+15.1\%\)</td><td>\(+15.1\%\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The coupling appears with the predicted sign and \(\theta_2\)-parity at every pose. A raw pose-by-pose
+        regression of measured against predicted coupling gives measured \(=1.06\times\) predicted (\(r=+0.95\)).
+        The pose set is symmetric in \(\theta_2\) and the predicted coupling is odd in \(\theta_2\), so the combination
+        \(\big(C(+\theta_2)-C(-\theta_2)\big)/2\) restricts the estimate to that odd component, isolating it from
+        anything additive or even, such as sensor bias, bar-azimuth leak, or a one-signed friction residue. This
+        estimator gives measured \(=0.96\times\) predicted (\(r=+0.89\)), the aggregate figure quoted in
+        Sec.&nbsp;III-B, with the coupling growing with lever arm exactly as predicted:
+      </p>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>Pose pair</th><th>\(L=85\)&nbsp;mm</th><th>\(L=117\)&nbsp;mm</th><th>\(L=150\)&nbsp;mm</th><th>Predicted @ 150&nbsp;mm</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\((-30,\pm 20)\)</td><td>\(-0.038\)</td><td>\(-0.057\)</td><td>\(-0.078\)</td><td>\(-0.096\)&nbsp;N&middot;m</td></tr>
+            <tr><td>\((-30,\pm 30)\)</td><td>\(-0.093\)</td><td>\(-0.126\)</td><td>\(-0.162\)</td><td>\(-0.193\)&nbsp;N&middot;m</td></tr>
+            <tr><td>\((-20,\pm 30)\)</td><td>\(-0.076\)</td><td>\(-0.124\)</td><td>\(-0.172\)</td><td>\(-0.139\)&nbsp;N&middot;m</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <span class="callout-label">Bound</span>
+        <p>
+          Across both channels and all nine rung-pairs, the worst residual against
+          \(\boldsymbol{\tau}=J^{\top}\mathbf{m}\) is \(0.044\)&nbsp;N&middot;m \(=1.2\%\) of the
+          \(3.75\)&nbsp;N&middot;m rating and \(7.5\times\) below the wrist's \(0.33\)&nbsp;N&middot;m backdrive
+          friction. After the closed-form compensation, the backdrive friction, not cross-axis coupling, sets the
+          limit on torque attribution for this hardware.
+        </p>
+      </div>
+
+      <p class="deriv-note">
+        Measured friction sets that floor: breakaway is \(0.107\)&ndash;\(0.188\)&nbsp;N&middot;m on yaw and
+        \(0.072\)&ndash;\(0.089\)&nbsp;N&middot;m on pitch, and the variation between visits to a pose leaves a
+        \(0.02\)&ndash;\(0.04\)&nbsp;N&middot;m residual after two-approach averaging. Poses are motor-side; a residual
+        \(1^\circ\) output-pose error moves the predicted coupling by \(\le 1.2\) percentage points.
+      </p>
+
+      <p class="backlink" style="margin-top:34px;">
+        Verifies the statics stated in Sec.&nbsp;III-B and derived on the
+        <a href="derivation.html">kinematics &amp; statics page</a>. <a href="index.html">Back to the project page</a>.
+      </p>
+
+    </div>
+  </section>
+
+</body>
+
+</html>

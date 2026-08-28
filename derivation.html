@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<!--
+  Companion "full derivation" page referenced by DexWrist RA-L paper Sec. III-B.
+  Notation matches paper/root.tex. Kinematics CAD-verified; statics bench-verified
+  (see crossaxis.html for the measurement).
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DexWrist — Kinematics &amp; Statics Derivation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- MathJax 3 (the base site renders no math; this page adds it self-contained). -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'none'
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* ---- Page-specific layout, layered on top of the site's Bulma + index.css ---- */
+    html { font-size: 118%; }
+
+    .deriv-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 22px;
+      line-height: 1.6;
+      font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .deriv-wrap h2.section-title { margin-top: 12px; }
+
+    .deriv-wrap h3 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.35em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 40px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #eaeaea;
+    }
+
+    .deriv-wrap h4 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.08em;
+      font-weight: 600;
+      color: #2d3748;
+      margin: 26px 0 8px;
+    }
+
+    .deriv-wrap p { margin: 12px 0; text-align: left; }
+
+    .deriv-wrap ul { margin: 10px 0 10px 26px; }
+    .deriv-wrap ul li { margin: 6px 0; }
+
+    /* Result / callout box */
+    .callout {
+      background: #eef4ff;
+      border-left: 4px solid #3273dc;
+      border-radius: 6px;
+      padding: 4px 20px;
+      margin: 22px 0;
+    }
+    .callout.key {
+      background: #eafaf1;
+      border-left-color: #27ae60;
+    }
+    .callout.remark {
+      background: #fdf6ec;
+      border-left-color: #d69e2e;
+    }
+    .callout .callout-label {
+      display: block;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #3273dc;
+      margin-top: 12px;
+    }
+    .callout.key .callout-label { color: #1e8f52; }
+    .callout.remark .callout-label { color: #b7791f; }
+
+    /* Data table reuse (mirrors index.html .data-table) */
+    .deriv-table-wrap { overflow-x: auto; margin: 18px 0; }
+    table.deriv-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+      font-size: 0.98em;
+    }
+    table.deriv-table th, table.deriv-table td {
+      border: 1px solid #ddd;
+      padding: 9px 13px;
+      text-align: center;
+    }
+    table.deriv-table th { background: #f0f0f0; font-weight: 600; }
+    table.deriv-table td:first-child, table.deriv-table th:first-child { text-align: left; }
+
+    .deriv-note {
+      font-size: 0.9em;
+      color: #666;
+      margin: 8px 0 0;
+    }
+
+    .backlink { font-size: 0.95em; }
+
+    /* keep long display equations from forcing horizontal page scroll */
+    mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <h1 class="title is-2 publication-title" style="color:#111;">Kinematics &amp; Statics of the DexWrist Mechanism</h1>
+        <p class="is-size-5" style="color:#555;">Full derivation accompanying Sec.&nbsp;III-B</p>
+        <p class="backlink" style="margin-top:10px;"><a href="index.html">&larr; back to the project page</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INTRO ==================== -->
+  <section class="section">
+    <div class="deriv-wrap">
+      <p>
+        The DexWrist is a <strong>decoupled 2-(R,&nbsp;RR) spherical parallel mechanism</strong> of the Agile-Eye family.
+        Both actuators sit in the forearm and drive the output flange about a single fixed point (the wrist center),
+        so the mechanism produces pure rotation. From the home geometry we derive the closed-form forward and
+        inverse kinematics, the differential kinematics, and the virtual-work statics. The kinematics is verified
+        against the CAD model, and the statics <a href="crossaxis.html">on the bench</a>.
+      </p>
+      <p>
+        Notation follows the paper. The two actuated joint angles are \(\theta_1\) (yaw leg) and \(\theta_2\) (pitch leg);
+        the two output angles are \(q_1\) (yaw, R/U) and \(q_2\) (pitch, F/E). We write joint and output axes as unit
+        vectors \(\mathbf{e}_1,\dots,\mathbf{e}_5\) and \(\mathbf{v}\), expressed in a fixed base frame.
+      </p>
+
+      <!-- ==================== 1. ARCHITECTURE ==================== -->
+      <h3>1.&ensp;Mechanism and axis definitions</h3>
+      <p>
+        The mechanism is a <strong>single-loop spherical 5R</strong> chain whose five revolute axes
+        \(\mathbf{e}_1,\mathbf{e}_3,\mathbf{e}_5,\mathbf{e}_4,\mathbf{e}_2\) all pass through the wrist center. With five
+        one-DOF joints and the three constraints of a spherical closed loop, the mobility is \(5-3=2\). Two of the joints
+        are actuated; the other three are passive.
+      </p>
+      <ul>
+        <li><strong>Yaw leg (R):</strong> base &mdash;(\(\mathbf{e}_1\), actuated by \(\theta_1\))&mdash; link&nbsp;L1
+          &mdash;(\(\mathbf{e}_3\), passive)&mdash; output link. The axis \(\mathbf{e}_3\) is fixed in L1 and is also the
+          output link's body-\(z\) axis.</li>
+        <li><strong>Pitch leg (RR):</strong> base &mdash;(\(\mathbf{e}_2\), actuated by \(\theta_2\))&mdash; link&nbsp;L2
+          &mdash;(\(\mathbf{e}_4\), passive)&mdash; link&nbsp;L3 &mdash;(\(\mathbf{e}_5\), passive)&mdash; output link.
+          The axis \(\mathbf{e}_5\) is fixed in the output link.</li>
+        <li><strong>Output:</strong> the flange axis \(\mathbf{v}\). The output link carries the rigid orthonormal triad
+          \(\{\mathbf{e}_5,\mathbf{v},\mathbf{e}_3\}\), which at home coincides with
+          \((\hat{\mathbf{x}},\hat{\mathbf{y}},\hat{\mathbf{z}})\).</li>
+      </ul>
+      <p>
+        We choose the base frame to coincide with the mechanism at home: \(\hat{\mathbf{x}}\parallel\mathbf{e}_1\) (yaw motor
+        axis), \(\hat{\mathbf{z}}\parallel\mathbf{e}_2\) (pitch motor axis), and \(\hat{\mathbf{y}}\parallel\mathbf{v}_0\)
+        (home output direction).
+      </p>
+
+      <!-- ==================== 2. HOME VECTORS + TWISTS ==================== -->
+      <h3>2.&ensp;Home unit vectors and link twists</h3>
+      <p>
+        The rotation matrices about the base axes are
+        \[
+          R_x(\phi)=\begin{bmatrix}1&0&0\\0&\cos\phi&-\sin\phi\\0&\sin\phi&\cos\phi\end{bmatrix},
+          \qquad
+          R_z(\phi)=\begin{bmatrix}\cos\phi&-\sin\phi&0\\ \sin\phi&\cos\phi&0\\0&0&1\end{bmatrix}.
+        \]
+        In the base frame, the axes at home \((\theta_1=\theta_2=0)\) are
+      </p>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>Axis</th><th>Role</th><th>Home unit vector</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\(\mathbf{e}_1\)</td><td>yaw motor axis (actuated)</td><td>\((1,\,0,\,0)=\hat{\mathbf{x}}\)</td></tr>
+            <tr><td>\(\mathbf{e}_2\)</td><td>pitch motor axis (actuated)</td><td>\((0,\,0,\,1)=\hat{\mathbf{z}}\)</td></tr>
+            <tr><td>\(\mathbf{e}_3^{\,0}\)</td><td>yaw driven axis (passive)</td><td>\((0,\,0,\,1)=\hat{\mathbf{z}}\)</td></tr>
+            <tr><td>\(\mathbf{e}_4^{\,0}\)</td><td>pitch driven axis (passive)</td><td>\((0,\,\cos\alpha,\,-\sin\alpha)\)</td></tr>
+            <tr><td>\(\mathbf{e}_5^{\,0}\)</td><td>output reference axis (passive)</td><td>\((1,\,0,\,0)=\hat{\mathbf{x}}\)</td></tr>
+            <tr><td>\(\mathbf{v}_0\)</td><td>output flange axis</td><td>\((0,\,1,\,0)=\hat{\mathbf{y}}\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Each pair of consecutive axes subtends a fixed link twist. All twists are right angles except one:
+      </p>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead><tr><th>Twist</th><th>Between</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>\(\alpha_0\)</td><td>\(\angle(\mathbf{e}_1,\mathbf{e}_2)\)</td><td>\(90^\circ\)</td></tr>
+            <tr><td>\(\alpha_1\)</td><td>\(\angle(\mathbf{e}_1,\mathbf{e}_3)\)</td><td>\(90^\circ\)</td></tr>
+            <tr><td>\(\alpha_2\)</td><td>\(\angle(\mathbf{e}_2,\mathbf{e}_4)\)</td><td>\(95^\circ\)</td></tr>
+            <tr><td>\(\alpha_3\)</td><td>\(\angle(\mathbf{e}_3,\mathbf{e}_5)\)</td><td>\(90^\circ\)</td></tr>
+            <tr><td>\(\alpha_4\)</td><td>\(\angle(\mathbf{e}_4,\mathbf{e}_5)\)</td><td>\(90^\circ\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The lone non-orthogonal twist is \(\alpha_2=95^\circ\). We define the offset
+        \[ \alpha \triangleq \alpha_2-90^\circ = 5^\circ, \]
+        which appears through \(\cos\alpha\) and \(\sin\alpha\) below; it provides clearance for the yaw axis to reach the
+        full \(\pm 40^\circ\) range. The home geometry satisfies the two orthogonality conditions directly:
+        \(\mathbf{e}_3^{\,0}\!\cdot\!\mathbf{v}_0=\hat{\mathbf{z}}\!\cdot\!\hat{\mathbf{y}}=0\) and
+        \(\mathbf{e}_4^{\,0}\!\cdot\!\mathbf{e}_5^{\,0}=(0,\cos\alpha,-\sin\alpha)\!\cdot\!(1,0,0)=0\).
+      </p>
+
+      <!-- ==================== 3. ACTUATED AXES + LOOP CLOSURE ==================== -->
+      <h3>3.&ensp;Actuated axes and loop-closure constraints</h3>
+      <p>
+        Each actuator rotates its driven axis about its own motor axis:
+        \[
+          \mathbf{e}_3 = R_x(\theta_1)\,\mathbf{e}_3^{\,0} = R_x(\theta_1)\,\hat{\mathbf{z}}
+            = (0,\ -\sin\theta_1,\ \cos\theta_1),
+        \]
+        \[
+          \mathbf{e}_4 = R_z(\theta_2)\,\mathbf{e}_4^{\,0}
+            = R_z(\theta_2)\,(0,\cos\alpha,-\sin\alpha)
+            = (-\cos\alpha\,\sin\theta_2,\ \cos\alpha\,\cos\theta_2,\ -\sin\alpha).
+        \]
+        The output link's orientation is written as
+        \[ R_{\text{out}} = R_x(q_1)\,R_z(q_2), \]
+        a rotation by \(q_1\) about the base \(x\)-axis followed by \(q_2\) about the (moved) body \(z\)-axis
+        \(\mathbf{e}_3\). This choice removes the single redundant roll DOF of a general orientation and leaves the two
+        physical output angles \((q_1,q_2)\). The three output-link axes then read
+      </p>
+      <p style="text-align:center;">
+        \(\mathbf{e}_3 = R_{\text{out}}\,\hat{\mathbf{z}} = (0,\ -\sin q_1,\ \cos q_1),\)
+      </p>
+      <p style="text-align:center;">
+        \(\mathbf{v} = R_{\text{out}}\,\hat{\mathbf{y}} = (-\sin q_2,\ \cos q_2\cos q_1,\ \cos q_2\sin q_1),\)
+      </p>
+      <p style="text-align:center;">
+        \(\mathbf{e}_5 = R_{\text{out}}\,\hat{\mathbf{x}} = (\cos q_2,\ \cos q_1\sin q_2,\ \sin q_1\sin q_2).\)
+      </p>
+      <p>
+        Closing the loop imposes exactly the two constant-angle conditions read off the twists
+        \(\alpha_3=\alpha_4=90^\circ\):
+      </p>
+      <div class="callout">
+        <span class="callout-label">Loop-closure constraints</span>
+        \[ \text{(C1, yaw)}\quad \mathbf{e}_3\cdot\mathbf{v}=0, \qquad\qquad
+           \text{(C2, pitch)}\quad \mathbf{e}_4\cdot\mathbf{e}_5=0. \]
+      </div>
+      <p>
+        In C1, \(\mathbf{e}_3\) is set by motor&nbsp;1 and \(\mathbf{v}\) by the output; in C2, \(\mathbf{e}_4\) is set by
+        motor&nbsp;2 and \(\mathbf{e}_5\) by the output. The two scalar equations determine the two unknowns \((q_1,q_2)\).
+      </p>
+
+      <!-- ==================== 4. FORWARD KINEMATICS ==================== -->
+      <h3>4.&ensp;Forward kinematics \((\theta_1,\theta_2)\mapsto(q_1,q_2)\)</h3>
+
+      <h4>4.1&ensp;Yaw constraint fixes \(q_1\)</h4>
+      <p>
+        Substitute \(\mathbf{e}_3=(0,-\sin\theta_1,\cos\theta_1)\) (from motor&nbsp;1) and
+        \(\mathbf{v}=(-\sin q_2,\ \cos q_2\cos q_1,\ \cos q_2\sin q_1)\) into C1:
+        \[
+          \mathbf{e}_3\cdot\mathbf{v}
+            = -\sin\theta_1\,\cos q_2\cos q_1 + \cos\theta_1\,\cos q_2\sin q_1
+            = \cos q_2\,\big(\cos\theta_1\sin q_1 - \sin\theta_1\cos q_1\big)
+            = \cos q_2\,\sin(q_1-\theta_1).
+        \]
+        Within the mechanism's range \(|q_2|<\tfrac{\pi}{2}\) we have \(\cos q_2\neq 0\), so \(\sin(q_1-\theta_1)=0\), giving
+      </p>
+      <div class="callout key">
+        <span class="callout-label">Yaw (exact)</span>
+        \[ q_1=\theta_1. \]
+      </div>
+      <p>Yaw maps one-to-one onto its motor at every configuration.</p>
+
+      <h4>4.2&ensp;Pitch constraint fixes \(q_2\)</h4>
+      <p>
+        Substitute \(\mathbf{e}_4=(-\cos\alpha\,\sin\theta_2,\ \cos\alpha\,\cos\theta_2,\ -\sin\alpha)\) (from motor&nbsp;2)
+        and \(\mathbf{e}_5=(\cos q_2,\ \cos q_1\sin q_2,\ \sin q_1\sin q_2)\) into C2, and use \(q_1=\theta_1\):
+        \[
+          \mathbf{e}_4\cdot\mathbf{e}_5
+            = -\cos\alpha\,\sin\theta_2\,\cos q_2
+              + \big(\cos\alpha\,\cos\theta_1\cos\theta_2 - \sin\alpha\,\sin\theta_1\big)\sin q_2 = 0.
+        \]
+        Solving for the tangent,
+        \[
+          \tan q_2 = \frac{\cos\alpha\,\sin\theta_2}{\cos\alpha\,\cos\theta_1\cos\theta_2 - \sin\alpha\,\sin\theta_1},
+        \]
+        and taking the quadrant-correct branch,
+      </p>
+      <div class="callout key">
+        <span class="callout-label">Pitch (closed form)</span>
+        \[ q_2 = \operatorname{atan2}\!\big(\cos\alpha\,\sin\theta_2,\ \ \cos\alpha\,\cos\theta_1\cos\theta_2 - \sin\alpha\,\sin\theta_1\big). \]
+      </div>
+      <p>
+        Pitch is a closed-form function of both actuators. In the orthogonal limit \(\alpha\to 0\) (so \(\cos\alpha\to 1\),
+        \(\sin\alpha\to 0\)) this collapses to the clean Agile-Eye relation
+        \[ \tan q_2 = \frac{\tan\theta_2}{\cos q_1}. \]
+      </p>
+
+      <h4>4.3&ensp;Output axis</h4>
+      <p>
+        With \((q_1,q_2)\) known, the output flange axis is
+        \[ \mathbf{v} = \big(-\sin q_2,\ \ \cos q_2\cos q_1,\ \ \cos q_2\sin q_1\big), \]
+        which returns \(\mathbf{v}=\hat{\mathbf{y}}\) at home, as required.
+      </p>
+
+      <!-- ==================== 5. INVERSE KINEMATICS ==================== -->
+      <h3>5.&ensp;Inverse kinematics \((q_1,q_2)\mapsto(\theta_1,\theta_2)\)</h3>
+      <p>Yaw inverts trivially,</p>
+      <p style="text-align:center;">\(\theta_1 = q_1.\)</p>
+      <p>
+        For pitch, start from the C2 relation and divide through by \(\cos q_2\) (nonzero in range), using
+        \(\theta_1=q_1\):
+        \[
+          \cos\alpha\,\sin\theta_2
+            = \tan q_2\,\big(\cos\alpha\,\cos q_1\cos\theta_2 - \sin\alpha\,\sin q_1\big).
+        \]
+        Collecting the \(\theta_2\) terms puts this in the standard linear-in-\(\{\cos\theta_2,\sin\theta_2\}\) form
+      </p>
+      <div class="callout">
+        <span class="callout-label">Pitch inverse</span>
+        \[ A\cos\theta_2 + B\sin\theta_2 = C, \]
+        \[
+          A=-\tan q_2\,\cos\alpha\,\cos q_1,\qquad
+          B=\cos\alpha,\qquad
+          C=-\tan q_2\,\sin\alpha\,\sin q_1.
+        \]
+      </div>
+      <p>
+        This is solved in closed form by the standard harmonic-addition method. Writing
+        \(R=\sqrt{A^2+B^2}\) and \(\delta=\operatorname{atan2}(B,A)\), the equation becomes
+        \(R\cos(\theta_2-\delta)=C\), so
+        \[ \theta_2 = \delta \pm \arccos\!\left(\frac{C}{R}\right)
+            = \operatorname{atan2}(B,A) \pm \arccos\!\left(\frac{C}{\sqrt{A^2+B^2}}\right), \]
+        and we take the root lying in the physical range \(|\theta_2|<\tfrac{\pi}{2}\) (equivalently
+        \((\theta_1,\theta_2)\in\mathcal{Q}'=\{|\theta_i|<\tfrac{\pi}{2}\}\)). In the small-offset limit \(\alpha\to 0\)
+        this reduces to the explicit form
+        \[ \theta_2 \approx \operatorname{atan}\!\big(\cos q_1\,\tan q_2\big). \]
+      </p>
+
+      <!-- ==================== 6. VELOCITY JACOBIAN ==================== -->
+      <h3>6.&ensp;Differential kinematics and the diagonal constraint Jacobian</h3>
+      <p>
+        Differentiate the two constraints in time. The actuated axes rotate about their own motor axes, and the output
+        axes rotate with the flange angular velocity \(\boldsymbol{\omega}\):
+        \[
+          \dot{\mathbf{e}}_3=\dot\theta_1(\mathbf{e}_1\times\mathbf{e}_3),\quad
+          \dot{\mathbf{e}}_4=\dot\theta_2(\mathbf{e}_2\times\mathbf{e}_4),\quad
+          \dot{\mathbf{v}}=\boldsymbol{\omega}\times\mathbf{v},\quad
+          \dot{\mathbf{e}}_5=\boldsymbol{\omega}\times\mathbf{e}_5.
+        \]
+      </p>
+      <h4>6.1&ensp;Yaw constraint rate</h4>
+      <p>
+        Differentiating C1, \(\dot{\mathbf{e}}_3\cdot\mathbf{v} + \mathbf{e}_3\cdot\dot{\mathbf{v}}=0\):
+        \[
+          \dot\theta_1\,(\mathbf{e}_1\times\mathbf{e}_3)\cdot\mathbf{v}
+            + \mathbf{e}_3\cdot(\boldsymbol{\omega}\times\mathbf{v}) = 0.
+        \]
+        Using the scalar-triple-product identity \(\mathbf{e}_3\cdot(\boldsymbol{\omega}\times\mathbf{v})
+        = \boldsymbol{\omega}\cdot(\mathbf{v}\times\mathbf{e}_3) = -(\mathbf{e}_3\times\mathbf{v})\cdot\boldsymbol{\omega}\),
+        \[
+          \big[\mathbf{v}\cdot(\mathbf{e}_1\times\mathbf{e}_3)\big]\,\dot\theta_1
+            = (\mathbf{e}_3\times\mathbf{v})^\top\boldsymbol{\omega}.
+        \]
+      </p>
+      <h4>6.2&ensp;Pitch constraint rate</h4>
+      <p>
+        Identically, differentiating C2, \(\dot{\mathbf{e}}_4\cdot\mathbf{e}_5 + \mathbf{e}_4\cdot\dot{\mathbf{e}}_5=0\):
+        \[
+          \big[\mathbf{e}_5\cdot(\mathbf{e}_2\times\mathbf{e}_4)\big]\,\dot\theta_2
+            = (\mathbf{e}_4\times\mathbf{e}_5)^\top\boldsymbol{\omega}.
+        \]
+      </p>
+      <h4>6.3&ensp;Assembled form</h4>
+      <p>Stacking the two scalar equations gives the parallel-robot differential form</p>
+      <div class="callout">
+        <span class="callout-label">Velocity kinematics</span>
+        \[
+          K\,\dot{\boldsymbol{\theta}} = J_0\,\boldsymbol{\omega},\qquad
+          K=\begin{bmatrix}
+            \mathbf{v}\cdot(\mathbf{e}_1\times\mathbf{e}_3) & 0\\[2pt]
+            0 & \mathbf{e}_5\cdot(\mathbf{e}_2\times\mathbf{e}_4)
+          \end{bmatrix},\qquad
+          J_0=\begin{bmatrix}(\mathbf{e}_3\times\mathbf{v})^\top\\[2pt](\mathbf{e}_4\times\mathbf{e}_5)^\top\end{bmatrix}.
+        \]
+      </div>
+      <p>
+        The constraint matrix \(K\) is <strong>diagonal</strong>: each constraint's actuated term involves only its own
+        motor rate (\(\dot\theta_1\) through \(\mathbf{e}_3\) in C1, \(\dot\theta_2\) through \(\mathbf{e}_4\) in C2), so the
+        velocity constraint Jacobian is decoupled. Within the joint-limited configuration space
+        \(\mathcal{Q}'=\{|\theta_i|<\tfrac{\pi}{2}\}\), neither diagonal entry vanishes:
+        \(\mathbf{e}_1\times\mathbf{e}_3\) and \(\mathbf{v}\) cannot be orthogonal there, so
+        \(K_{11}\neq 0\), and likewise \(K_{22}\neq 0\); hence
+        \(\det K = K_{11}K_{22}\neq 0\) and the map is invertible throughout the workspace.
+      </p>
+
+      <!-- ==================== 7. STATICS ==================== -->
+      <h3>7.&ensp;Statics: virtual work and the triangular torque map</h3>
+      <p>
+        In the rigid quasi-static limit the mechanism is lossless, so actuator power equals output power for every
+        <em>feasible</em> motion,
+        \(\boldsymbol{\tau}^\top\dot{\boldsymbol{\theta}} = \mathbf{m}^\top\boldsymbol{\omega}\), where
+        \(\boldsymbol{\tau}=[\tau_1\ \tau_2]^\top\) are the actuator torques and \(\mathbf{m}\) is the external moment
+        applied at the output. The feasible angular velocities form the two-dimensional set
+        \(\boldsymbol{\omega}=J\,\dot{\boldsymbol{\theta}}\), where \(J\) is the \(3\times 2\) output Jacobian with columns
+        \[ \mathbf{j}_i \;=\; \mathrm{vee}\!\left(\frac{\partial R_{\text{out}}}{\partial\theta_i}\,R_{\text{out}}^{\top}\right),
+           \qquad i=1,2, \]
+        and \(J_0 J = K\) connects it to the constraint form of Sec.&nbsp;6. Substituting and requiring the power balance
+        for all \(\dot{\boldsymbol{\theta}}\) gives the statics directly:
+      </p>
+      <div class="callout">
+        <span class="callout-label">Statics (virtual work)</span>
+        \[ \boldsymbol{\tau} = J^{\top}\mathbf{m}. \]
+      </div>
+
+      <h4>7.1&ensp;The columns of \(J\), and why the map is triangular</h4>
+      <p>
+        Write the forward kinematics of Sec.&nbsp;4 as \(R_{\text{out}}=R_x(\theta_1)\,R_z\big(q_2(\theta_1,\theta_2)\big)\),
+        using \(q_1=\theta_1\) (exact). Differentiating with the chain rule,
+        \[
+          \frac{\partial R_{\text{out}}}{\partial\theta_1}R_{\text{out}}^{\top}
+            = [\hat{\mathbf{x}}]_\times + \frac{\partial q_2}{\partial\theta_1}\,[\mathbf{u}]_\times,
+          \qquad
+          \frac{\partial R_{\text{out}}}{\partial\theta_2}R_{\text{out}}^{\top}
+            = \frac{\partial q_2}{\partial\theta_2}\,[\mathbf{u}]_\times,
+        \]
+        where \(\mathbf{u}=R_x(\theta_1)\hat{\mathbf{z}}=\mathbf{e}_3\) is the (moved) pitch output axis and
+        \([\cdot]_\times\) is the skew map. Hence
+        \[ \mathbf{j}_1 = \mathbf{e}_1 + \frac{\partial q_2}{\partial\theta_1}\,\mathbf{e}_3,
+           \qquad
+           \mathbf{j}_2 = \frac{\partial q_2}{\partial\theta_2}\,\mathbf{e}_3. \]
+        Writing \(M_1=\mathbf{m}\cdot\mathbf{e}_1\) and \(M_2=\mathbf{m}\cdot\mathbf{e}_3\) for the moment components about
+        the yaw and pitch output axes, \(\boldsymbol{\tau}=J^\top\mathbf{m}\) reads componentwise:
+      </p>
+      <div class="callout key">
+        <span class="callout-label">Triangular torque map</span>
+        \[
+          \tau_1 = M_1 + M_2\,\frac{\partial q_2}{\partial\theta_1},
+          \qquad
+          \tau_2 = M_2\,\frac{\partial q_2}{\partial\theta_2}.
+        \]
+      </div>
+      <p>
+        Because \(q_1=\theta_1\) exactly while \(q_2\) depends on both actuator angles, the input&ndash;output map is
+        lower-triangular and \(J^{\top}\) is therefore <em>upper</em>-triangular. The component of \(\mathbf{m}\) outside
+        \(\mathrm{span}\{\mathbf{e}_1,\mathbf{e}_3\}\) does no work on any feasible motion and is reacted by the structure.
+        Two consequences follow immediately:
+      </p>
+      <ul>
+        <li><strong>A yaw moment never reaches the pitch actuator</strong>, at any configuration: \(\tau_2\) contains no
+          \(M_1\) term. This structural null is exact.</li>
+        <li><strong>A pitch moment reflects onto the yaw actuator</strong> in the ratio
+          \(\rho \triangleq (\partial q_2/\partial\theta_1)\big/(\partial q_2/\partial\theta_2)\), the cross-axis gain.</li>
+      </ul>
+
+      <h4>7.2&ensp;The cross-axis gain over the workspace</h4>
+      <p>
+        The gain \(\rho\) is the forward kinematics of Sec.&nbsp;4 differentiated, a closed-form function of the motor
+        angles. Its structure:
+      </p>
+      <ul>
+        <li>\(\rho\) <strong>vanishes identically on \(\theta_2=0\)</strong> (the numerator of \(q_2\) is
+          \(\cos\alpha\sin\theta_2\), so \(\partial q_2/\partial\theta_1\propto\sin\theta_2\));</li>
+        <li>along \(\theta_1=0\) only the \(5^\circ\) twist contributes: \(\rho=\tan\alpha\,\sin\theta_2\), at most
+          \(6\%\);</li>
+        <li>it grows with deflection: \(15\%\) at \((20^\circ,20^\circ)\), \(31\%\) at \((30^\circ,30^\circ)\), \(50\%\)
+          at the \((40^\circ,40^\circ)\) motor corner;</li>
+        <li>it is driven by the yaw deflection, not the twist: setting \(\alpha=0\) still leaves \(25\%\) at
+          \((30^\circ,30^\circ)\).</li>
+      </ul>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>\(\theta_1\backslash\theta_2\)</th><th>&minus;40&deg;</th><th>&minus;30&deg;</th><th>&minus;20&deg;</th><th>&minus;10&deg;</th><th>+10&deg;</th><th>+20&deg;</th><th>+30&deg;</th><th>+40&deg;</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>&minus;40&deg;</strong></td><td>33.8</td><td>30.0</td><td>22.4</td><td>12.0</td><td>&minus;12.0</td><td>&minus;22.4</td><td>&minus;30.0</td><td>&minus;33.8</td></tr>
+            <tr><td><strong>&minus;30&deg;</strong></td><td>22.0</td><td>19.8</td><td>14.9</td><td>8.0</td><td>&minus;8.0</td><td>&minus;14.9</td><td>&minus;19.8</td><td>&minus;22.0</td></tr>
+            <tr><td><strong>&minus;20&deg;</strong></td><td>12.0</td><td>11.1</td><td>8.5</td><td>4.6</td><td>&minus;4.6</td><td>&minus;8.5</td><td>&minus;11.1</td><td>&minus;12.0</td></tr>
+            <tr><td><strong>&minus;10&deg;</strong></td><td>3.0</td><td>3.2</td><td>2.6</td><td>1.5</td><td>&minus;1.5</td><td>&minus;2.6</td><td>&minus;3.2</td><td>&minus;3.0</td></tr>
+            <tr><td><strong>+10&deg;</strong></td><td>&minus;14.5</td><td>&minus;12.2</td><td>&minus;8.8</td><td>&minus;4.6</td><td>4.6</td><td>8.8</td><td>12.2</td><td>14.5</td></tr>
+            <tr><td><strong>+20&deg;</strong></td><td>&minus;24.1</td><td>&minus;20.7</td><td>&minus;15.1</td><td>&minus;8.0</td><td>8.0</td><td>15.1</td><td>20.7</td><td>24.1</td></tr>
+            <tr><td><strong>+30&deg;</strong></td><td>&minus;35.4</td><td>&minus;30.7</td><td>&minus;22.6</td><td>&minus;12.0</td><td>12.0</td><td>22.6</td><td>30.7</td><td>35.4</td></tr>
+            <tr><td><strong>+40&deg;</strong></td><td>&minus;49.7</td><td>&minus;43.5</td><td>&minus;32.2</td><td>&minus;17.1</td><td>17.1</td><td>32.2</td><td>43.5</td><td>49.7</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="deriv-note">
+        Cross-axis gain \(\rho=(\partial q_2/\partial\theta_1)/(\partial q_2/\partial\theta_2)\) in percent over the
+        motor-angle workspace. \(\rho\) is odd in \(\theta_2\); the mild asymmetry in \(\theta_1\) is the \(\alpha=5^\circ\)
+        twist.
+      </p>
+
+      <h4>7.3&ensp;Exact compensation</h4>
+      <p>
+        Since the coupling is known in closed form at every measured motor pose, the triangular map inverts by
+        back-substitution:
+        \[
+          M_2 = \tau_2\Big/\frac{\partial q_2}{\partial\theta_2},
+          \qquad
+          M_1 = \tau_1 - M_2\,\frac{\partial q_2}{\partial\theta_1}.
+        \]
+        The diagonal (one-actuator-per-DOF) approximation is exact where \(\rho=0\) (the entire line
+        \(\theta_2=0\), and within \(6\%\) along \(\theta_1=0\)); elsewhere its error is exactly the gain
+        \(\rho\) tabulated above, which this compensation removes.
+      </p>
+
+      <h4>7.4&ensp;Bench verification</h4>
+      <p>
+        Hanging known masses on each output axis in turn and reading the <em>opposite</em> actuator confirms both
+        predictions: the yaw-loaded pitch torque is null (\(2.2\) percentage points RMS, at the fixture noise floor),
+        and the pitch-loaded yaw torque matches the predicted coupling at \(0.96\times\). The worst residual against
+        \(\boldsymbol{\tau}=J^{\top}\mathbf{m}\) is \(0.044\)&nbsp;N&middot;m, \(1.2\%\) of rated torque and
+        \(7.5\times\) below the wrist's backdrive friction.
+        <strong><a href="crossaxis.html">Full protocol and data &rarr;</a></strong>
+      </p>
+
+      <!-- ==================== 8. VERIFICATION ==================== -->
+      <h3>8.&ensp;CAD verification</h3>
+      <p>
+        The forward map was checked against the CAD model at four configurations spanning the range. The CAD frame reports
+        the home output as \(-\hat{\mathbf{y}}\) rather than \(+\hat{\mathbf{y}}\); this is a single global sign on
+        \(\mathbf{v}\), and the values below are the CAD sign convention. All components agree to four decimals.
+      </p>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>\((\theta_1,\theta_2)\)</th><th>\(v_x\)</th><th>\(v_y\)</th><th>\(v_z\)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\((20^\circ,\ 0^\circ)\)</td><td>\(0\)</td><td>\(-0.9397\)</td><td>\(-0.3420\)</td></tr>
+            <tr><td>\((0^\circ,\ 20^\circ)\)</td><td>\(0.3420\)</td><td>\(-0.9397\)</td><td>\(0\)</td></tr>
+            <tr><td>\((20^\circ,\ 20^\circ)\)</td><td>\(0.3721\)</td><td>\(-0.8722\)</td><td>\(-0.3175\)</td></tr>
+            <tr><td>\((-20^\circ,\ 20^\circ)\)</td><td>\(0.3508\)</td><td>\(-0.8800\)</td><td>\(0.3203\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="deriv-note">
+        The kinematics and statics were also checked numerically over a 17&times;17 grid of the full \(\pm 40^\circ\)
+        workspace: the velocity relation of Sec.&nbsp;6 agrees with the exact Jacobian to
+        \(1.5\times 10^{-9}\), the triangular form of Sec.&nbsp;7.1 equals \(J^{\top}\mathbf{m}\) to
+        \(4.4\times 10^{-16}\)&nbsp;N&middot;m, and \(\boldsymbol{\tau}=J^{\top}\mathbf{m}\) agrees with direct
+        potential-energy differentiation to \(3.1\times 10^{-9}\)&nbsp;N&middot;m.
+      </p>
+
+      <p class="backlink" style="margin-top:34px;">
+        Companion to Sec.&nbsp;III-B of the paper. See also the
+        <a href="crossaxis.html">cross-axis bench experiment</a> and the <a href="index.html">project page</a>.
+      </p>
+
+    </div>
+  </section>
+
+</body>
+
+</html>

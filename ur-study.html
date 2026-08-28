@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--
+  UR3e controller-comparison study (admittance vs. forceMode), teleoperated wiping.
+  Referenced by the DexWrist RA-L paper's Wiping Experiments section.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DexWrist — UR3e Controller Study: Admittance vs. forceMode</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <style>
+    html { font-size: 118%; }
+
+    .deriv-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 22px;
+      line-height: 1.6;
+      font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .deriv-wrap h3 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.35em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 40px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #eaeaea;
+    }
+
+    .deriv-wrap p { margin: 12px 0; text-align: left; }
+    .deriv-wrap ul { margin: 10px 0 10px 26px; }
+    .deriv-wrap ul li { margin: 6px 0; }
+
+    .deriv-table-wrap { overflow-x: auto; margin: 18px 0; }
+    table.deriv-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+      font-size: 0.98em;
+    }
+    table.deriv-table th, table.deriv-table td {
+      border: 1px solid #ddd;
+      padding: 9px 13px;
+      text-align: center;
+    }
+    table.deriv-table th { background: #f0f0f0; font-weight: 600; }
+    table.deriv-table td:first-child, table.deriv-table th:first-child { text-align: left; }
+
+    .deriv-note { font-size: 0.9em; color: #666; margin: 8px 0 0; }
+    .backlink { font-size: 0.95em; }
+
+    .fig-block { margin: 26px auto; text-align: center; }
+    .fig-block img { max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 6px; }
+    .fig-block .fig-caption { font-size: 0.9em; color: #555; margin-top: 8px; text-align: left; }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <h1 class="title is-2 publication-title" style="color:#111;">UR3e Controller Study: Admittance vs. forceMode</h1>
+        <p class="is-size-5" style="color:#555;">Baseline validation for the wiping experiments</p>
+        <p class="backlink" style="margin-top:10px;">
+          <a href="index.html">&larr; back to the project page</a> &ensp;&middot;&ensp;
+          <a href="franka.html">Franka wiping experiment</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="deriv-wrap">
+
+      <p>
+        The paper's wiping baseline runs the stock UR3e under our Cartesian admittance controller. This study swaps only
+        the low-level controller, holding the rig, operator, and task fixed, and compares it against
+        UR's native <code>forceMode</code>. The two are statistically indistinguishable in both completion time
+        (Mann&ndash;Whitney <em>p</em>&nbsp;=&nbsp;0.70) and success rate (Fisher's exact
+        <em>p</em>&nbsp;=&nbsp;0.78), so the stock UR3e's contact performance in the paper reflects its hardware rather
+        than the control loop.
+      </p>
+
+      <h3>Design</h3>
+      <ul>
+        <li><strong>Conditions.</strong> <em>admittance</em> = the paper's baseline controller (Cartesian admittance,
+          operator-driven contact force, parameters unchanged from the paper). <em>forceMode</em> = UR's native hybrid
+          force/motion controller, regulating a constant 15&nbsp;N press along the board normal.</li>
+        <li><strong>Task.</strong> Erase one marker dot from a whiteboard under teleoperation. 42 dots are laid out on
+          the board, one per trial. Success = fully erased, judged by the same person every trial, 90&nbsp;s cap.</li>
+        <li><strong>Protocol.</strong> Strict A/B/A/B interleave, single operator, 42 trials per condition (84 total).
+          A protective stop or e-stop ends the trial as a failure with no retry. Completion time is measured on
+          successful trials only. Under teleoperation a jittery or fault-prone controller forces the operator to slow
+          down, so completion time aggregates controller quality at the task level.</li>
+      </ul>
+
+      <h3>Results</h3>
+      <div class="deriv-table-wrap">
+        <table class="deriv-table">
+          <thead>
+            <tr><th>Metric</th><th>admittance</th><th>forceMode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Success rate</td><td><strong>35/42 (83%)</strong></td><td><strong>33/42 (79%)</strong></td></tr>
+            <tr><td>Faults / timeouts</td><td>7 / 0</td><td>9 / 0</td></tr>
+            <tr><td>Completion time, successes (mean &pm; std)</td><td><strong>4.42 &pm; 3.99&nbsp;s</strong> (n=35)</td><td><strong>4.07 &pm; 1.67&nbsp;s</strong> (n=33)</td></tr>
+            <tr><td>Completion time, median</td><td>3.39&nbsp;s</td><td>3.77&nbsp;s</td></tr>
+            <tr><td>Mean |F<sub>normal</sub>| in contact</td><td>11.5 &pm; 4.1&nbsp;N</td><td>15.7 &pm; 4.0&nbsp;N</td></tr>
+            <tr><td>In-wipe force std</td><td>8.96&nbsp;N</td><td>4.99&nbsp;N</td></tr>
+            <tr><td>Peak |F<sub>normal</sub>| (mean of per-trial peaks)</td><td>34.5&nbsp;N</td><td>26.7&nbsp;N</td></tr>
+            <tr><td>Force setpoint</td><td>none (operator-driven)</td><td>15&nbsp;N (regulated)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fig-block">
+        <img src="static/images/urstudy/ur_completion_times.png" alt="Completion time strip plot, admittance vs forceMode">
+        <p class="fig-caption">
+          Completion time on successful trials. The one admittance outlier at 26.5&nbsp;s is a trial where the operator
+          barely pressed (5.1&nbsp;N mean, the lowest of any trial); it alone raises the admittance std from 1.25 to
+          3.99&nbsp;s. The medians, 3.39 vs 3.77&nbsp;s, show the same absence of separation as the test statistic.
+        </p>
+      </div>
+
+      <div class="fig-block">
+        <img src="static/images/urstudy/ur_force_traces.png" alt="Force traces, admittance vs forceMode">
+        <p class="fig-caption">
+          Normal contact force for a duration-matched pair of successful trials (4.7 vs 4.8&nbsp;s, full trials
+          including approach). The operator-driven admittance trace is spiky; forceMode regulates about its 15&nbsp;N
+          setpoint. Both erase the dot in the same time.
+        </p>
+      </div>
+
+      <h3>Method</h3>
+      <p>
+        UR3e leader&ndash;follower teleoperation over RTDE, single operator. Each trial rebuilds the controller fresh
+        (auto-home and F/T re-zero) before the timer starts. Wrench and TCP pose are recorded at 100&nbsp;Hz from the
+        UR3e's built-in tool-flange F/T estimate, re-biased at each controller build; force metrics use in-contact
+        samples only (|F<sub>normal</sub>| above 3&nbsp;N on base-Z, the same axis as the press force). forceMode ran
+        with a 15&nbsp;N press, compliant speed 0.05, damping 0.1, gain scaling 0.8. The robot ran on its reduced
+        safety-limits level. Fault detection covers protective stop, e-stop, abnormal safety mode, control-program
+        death, and forceMode's silent in-singularity refusal. Two of forceMode's nine faults were such refusals, a
+        limitation of force mode in certain arm configurations that the admittance loop does not share.
+      </p>
+
+      <p class="deriv-note">
+        Completion times here are teleoperated times for a single dot, and are not comparable to the autonomous policy
+        results in the paper, whose wiping task uses scribbles of various sizes and dots at random locations. Only the
+        relative admittance-vs-forceMode comparison carries over.
+      </p>
+
+      <p class="backlink" style="margin-top:34px;">
+        Supports the baseline-validation claim in the paper's Wiping Experiments section. See also the
+        <a href="franka.html">Franka wiping experiment</a> and the <a href="index.html">project page</a>.
+      </p>
+
+    </div>
+  </section>
+
+</body>
+
+</html>

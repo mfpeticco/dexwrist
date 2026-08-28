@@ -261,8 +261,8 @@
        Provide: label, default (series A), dex (series B)
        Optionally: defaultErr, dexErr for error bars (± values)  */
     const data = [
-      { label: "Whiteboard Erase", default: 50, dex: 88, defaultErr: 11.7, dexErr: 8.3 },
-      { label: "Cluttered Refrigerator", default: 40, dex: 60, defaultErr: 12.6, dexErr: 12.6 }
+      { label: "Cluttered Refrigerator", sub: "AgileX", default: 40, dex: 60, defaultErr: 12.6, dexErr: 12.6 },
+      { label: "Whiteboard Erase", sub: "UR3e", default: 50, dex: 88.8, defaultErr: 11.8, dexErr: 7.4 }
     ];
 
     /* ===== 2) CONFIG – tweak visual settings if you like ===== */
@@ -355,8 +355,7 @@
 
         // ADD one shared group label centered beneath the two bars WITH subtext
         const groupCenter = gx + groupWidth / 2;
-        const subLabel = (i === 0) ? 'UR3e' : 'AgileX';
-        barsGroup.appendChild(groupTextLabel(groupCenter, d.label, subLabel));
+        barsGroup.appendChild(groupTextLabel(groupCenter, d.label, d.sub));
 
         // Error bars (optional)
         if (Number.isFinite(d.defaultErr)) {
