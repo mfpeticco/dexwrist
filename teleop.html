@@ -13,7 +13,7 @@
       --axis: #d0d0d0;
       --grid: #2b2b2b;
       --bg: #ffffff;
-      --text: #2b2b2b;
+      --text: #141a24;
       --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
       /* Chart aspect ratio controls (width:height). Update these to change ratio. */
@@ -23,10 +23,10 @@
 
     body{ margin:0; background:var(--bg); color:var(--text); font-family:var(--font); }
 
-    .chart-section{ max-width:1100px; margin:56px auto 0; padding:0 18px; }
+    .chart-section{ max-width:1100px; margin:0 auto; padding:0 18px; }
 
     .chart-title{
-      margin:0 0 6px 0; text-align:center; font-weight:800;
+      margin:0 0 6px 0; text-align:center; font-weight:700;
       font-size:1.7em; letter-spacing:.3px;
     }
 
@@ -68,13 +68,22 @@
     .value-label{ font-size:24px; font-weight:700; fill:#30343d; }
 
     @media (prefers-reduced-motion: reduce){ rect.bar{ transition-duration:0ms; } }
+
+    /* Match the project page, with scrollable charts on narrow screens. */
+    .chart-section { padding: 0; }
+    .chart-title { font-size: 1.1rem; font-weight: 700; text-align: left; }
+    .chart-wrap { overflow-x: auto; }
+    .chart-wrap svg { min-width: 640px; }
+    .legend { position: static; flex-wrap: wrap; justify-content: flex-start; font-size: .875rem; padding: 8px 0; gap: 12px; background: transparent; }
+    .policy-caption { font-size: .875rem; line-height: 1.5; color: #625c69; }
+    .chart-wrap:focus-visible { outline: 2px solid #714195; outline-offset: -2px; }
   </style>
 </head>
 <body>
   <section class="chart-section" id="dexwrist-chart">
     <h2 class="chart-title">Human Teleoperation Duration Comparison</h2>
 
-    <div class="chart-wrap">
+    <div class="chart-wrap" role="region" aria-label="Scrollable comparison chart" tabindex="0">
       <div class="legend" role="list" aria-hidden="false">
         <span class="key" role="listitem"><i class="swatch" style="background:var(--series-a)"></i> Default Wrist</span>
         <span class="key" role="listitem"><i class="swatch" style="background:var(--series-b)"></i> DexWrist (Ours)</span>
@@ -162,7 +171,7 @@
       data.forEach((d,i)=>{
         const gx = leftStart + i * (groupWidth + groupGap);
 
-        // Default (blue, left bar)
+        // Default (left bar)
         const aX = gx;
         const aY = y(d.default);
         const aH = (H - M.bottom) - aY;
@@ -170,7 +179,7 @@
         barA.classList.add('bar'); barA.style.setProperty('--d', (100*i)+'ms');
         barsGroup.appendChild(barA);
 
-        // DexWrist (orange, right bar)
+        // DexWrist (right bar)
         const bX = gx + barWidth + innerGap;
         const bY = y(d.dex);
         const bH = (H - M.bottom) - bY;

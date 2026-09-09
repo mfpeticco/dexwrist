@@ -13,8 +13,8 @@
       /* DexWrist (Ours) */
       --axis: #d0d0d0;
       --grid: #2b2b2b;
-      --bg: #f5f5f5;
-      --text: #2b2b2b;
+      --bg: #ffffff;
+      --text: #141a24;
       --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
@@ -37,7 +37,7 @@
     .chart-title {
       margin: 0 0 10px 0;
       font-size: 1.7em;
-      font-weight: 650;
+      font-weight: 700;
       letter-spacing: .2px;
       text-align: center;
     }
@@ -206,6 +206,15 @@
         width: 100%;
       }
     }
+
+    /* Match the project page, with scrollable charts on narrow screens. */
+    .chart-section { padding: 0; }
+    .chart-title { font-size: 1.1rem; font-weight: 700; text-align: left; }
+    .chart-wrap { overflow-x: auto; }
+    .chart-wrap svg { min-width: 640px; }
+    .legend { position: static; flex-wrap: wrap; justify-content: flex-start; font-size: .875rem; padding: 8px 0; gap: 12px; background: transparent; }
+    .policy-caption { font-size: .875rem; line-height: 1.5; color: #625c69; }
+    .chart-wrap:focus-visible { outline: 2px solid #714195; outline-offset: -2px; }
   </style>
 </head>
 
@@ -215,7 +224,7 @@
     <h2 class="chart-title">Diffusion Policy Success Rate Comparison</h2>
     <!-- <p class="chart-subtitle">Default Wrist vs DexWrist (Ours)</p> -->
 
-    <div class="chart-wrap">
+    <div class="chart-wrap" role="region" aria-label="Scrollable comparison chart" tabindex="0">
       <!-- Moved legend inside chart-wrap so it can be positioned top-right over the SVG -->
       <div class="legend" aria-hidden="false" role="list">
         <span class="key" role="listitem"><i class="swatch" style="background:var(--series-a)"></i> Default Wrist

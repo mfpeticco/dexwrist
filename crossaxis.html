@@ -4,16 +4,14 @@
   paper Sec. III-B ("protocol and data on the project website") and by
   derivation.html. Notation matches paper/root.tex.
 -->
-<html lang="en">
+<html lang="en" data-header-treatment="contained">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DexWrist — Cross-Axis Torque Coupling: Bench Measurement</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
 
   <script>
     window.MathJax = {
@@ -28,18 +26,18 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    html { font-size: 118%; }
+    /* Type scale is shared with the project page. */
 
     .deriv-wrap {
-      max-width: 900px;
+      max-width: var(--maxw);
       margin: 0 auto;
       padding: 0 22px;
       line-height: 1.6;
-      font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: inherit;
     }
 
     .deriv-wrap h3 {
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-size: 1.35em;
       font-weight: 700;
       color: #1a1a1a;
@@ -61,7 +59,7 @@
     }
     .callout .callout-label {
       display: block;
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-weight: 700;
       font-size: 0.82em;
       letter-spacing: 0.04em;
@@ -74,7 +72,7 @@
     table.deriv-table {
       border-collapse: collapse;
       width: 100%;
-      font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+      font-family: inherit;
       font-size: 0.98em;
     }
     table.deriv-table th, table.deriv-table td {
@@ -94,9 +92,10 @@
 
     mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
   </style>
+  <link rel="stylesheet" href="static/css/index.css">
 </head>
 
-<body>
+<body class="supplement-page">
 
   <section class="hero is-small is-light">
     <div class="hero-body">

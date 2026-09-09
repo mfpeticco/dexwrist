@@ -4,30 +4,28 @@
   joint-impedance controller. Referenced by the DexWrist RA-L paper's
   Wiping Experiments section.
 -->
-<html lang="en">
+<html lang="en" data-header-treatment="contained">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DexWrist — Franka Wiping Experiment</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
 
   <style>
-    html { font-size: 118%; }
+    /* Type scale is shared with the project page. */
 
     .deriv-wrap {
-      max-width: 900px;
+      max-width: var(--maxw);
       margin: 0 auto;
       padding: 0 22px;
       line-height: 1.6;
-      font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: inherit;
     }
 
     .deriv-wrap h3 {
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-size: 1.35em;
       font-weight: 700;
       color: #1a1a1a;
@@ -49,7 +47,7 @@
     }
     .callout .callout-label {
       display: block;
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-weight: 700;
       font-size: 0.82em;
       letter-spacing: 0.04em;
@@ -62,7 +60,7 @@
     table.deriv-table {
       border-collapse: collapse;
       width: 100%;
-      font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+      font-family: inherit;
       font-size: 0.98em;
     }
     table.deriv-table th, table.deriv-table td {
@@ -80,9 +78,10 @@
     .fig-block img { max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 6px; }
     .fig-block .fig-caption { font-size: 0.9em; color: #555; margin-top: 8px; text-align: left; }
   </style>
+  <link rel="stylesheet" href="static/css/index.css">
 </head>
 
-<body>
+<body class="supplement-page">
 
   <section class="hero is-small is-light">
     <div class="hero-body">

@@ -1,122 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-header-treatment="contained">
 
 <head>
-  <style>
-    .speed-indicator {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    /* Teleop split: 35% left, 65% right */
-    .teaser .teaser-gifs.teleop-split {
-      align-items: stretch;
-      flex-wrap: nowrap;
-      gap: 0;
-    }
-
-    .teaser .teaser-gifs.teleop-split .gif-item {
-      flex: 0 0 auto;
-      min-width: 0;
-    }
-
-    .teaser .teaser-gifs.teleop-split .gif-item.teleop-left {
-      flex: 0 0 35%;
-      max-width: 35%;
-    }
-
-    .teaser .teaser-gifs.teleop-split .gif-item.teleop-right {
-      flex: 0 0 65%;
-      max-width: 65%;
-    }
-
-    /* Data tables (functional requirements, teleop stats, completion time) */
-    .data-table-wrap {
-      overflow-x: auto;
-      margin: 20px auto;
-      max-width: 850px;
-    }
-
-    /* Shared table base — inherits body font size */
-    .data-table,
-    .compact-table {
-      border-collapse: collapse;
-      width: 100%;
-      font-family: 'Google Sans', 'Helvetica Neue', sans-serif;
-    }
-
-    .data-table th,
-    .data-table td,
-    .compact-table th,
-    .compact-table td {
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-
-    .data-table th,
-    .data-table td {
-      padding: 10px 14px;
-    }
-
-    .compact-table th,
-    .compact-table td {
-      padding: 8px 10px;
-    }
-
-    .data-table th,
-    .compact-table th {
-      background: #f0f0f0;
-      font-weight: 600;
-    }
-
-    .data-table td:first-child,
-    .compact-table td:first-child {
-      text-align: left;
-    }
-
-    .data-table .check { color: #27ae60; }
-    .data-table .cross { color: #e74c3c; }
-
-    /* Consistent body text for description paragraphs */
-    .section-text {
-      font-size: 1rem;
-      line-height: 1.6;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .section-note {
-      font-size: 0.85em;
-      color: #666;
-      text-align: center;
-      max-width: 800px;
-      margin: 8px auto 0;
-    }
-
-    .stat-highlight {
-      text-align: center;
-      font-size: 1.6em;
-      font-weight: 700;
-      color: #2d3748;
-      margin: 24px 0 10px;
-    }
-
-    .stat-highlight span {
-      color: #3273dc;
-    }
-  </style>
-
   <meta charset="utf-8">
   <meta name="description"
-    content="DexWrist: A Robotic Wrist for Constrained and Dynamic Manipulation. Learn about its innovative design and capabilities.">
+    content="DexWrist: A Robotic Wrist for Constrained and Dynamic Manipulation. A compliant, back-drivable robotic wrist with co-located degrees of freedom and quasi-direct-drive actuation.">
   <meta property="og:title" content="DexWrist: A Robotic Wrist for Dynamic Manipulation" />
   <meta property="og:description"
     content="DexWrist, a robotic wrist for constrained and dynamic manipulation, with co-located DOFs and low-impedance actuation." />
@@ -130,125 +18,63 @@
     content="DexWrist, a robotic wrist for constrained and dynamic manipulation, with co-located DOFs and low-impedance actuation.">
   <meta name="twitter:image" content="static/images/lab_logo_final.ico">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>DexWrist</title>
+  <title>DexWrist: A Robotic Wrist for Constrained and Dynamic Manipulation</title>
   <link rel="canonical" href="https://martinpeticco.com/dexwrist/">
   <link rel="icon" type="image/x-icon" href="static/images/lab_logo_final.ico">
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <script defer src="static/js/index.js"></script>
 </head>
 
 <body>
 
-  <!-- ==================== HERO ==================== -->
-  <section class="hero"
-    style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/images/background.gif'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">DexWrist: A Robotic Wrist for Constrained and
-              Dynamic Manipulation</h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                <span class="author-block"><a href="https://martinpeticco.com" target="_blank">Martin
-                    Peticco</a><sup>1</sup>,</span>
-                <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank">Gabriella
-                  Ulloa</a><sup>1</sup>,</span>
-
-              <span class="author-block">John Marangola<sup>1</sup>,</span>
-              <a href="https://www.nitishdashora.com/" target="_blank"><span class="author-block">Nitish
-                  Dashora<sup>1</sup>,</span></a>
-              <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><sup>1</sup></span>
-
-            </div>
-
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                <span>MIT<sup>1</sup></span>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                  <img src="static/images/lab_logo.png" alt="Improbable AI Lab" class="affiliation-logo"
-                    style="height: 1.5vw; min-height: 12px; max-height: 32px;">
-                </div>
-                (Under Review)
-              </span>
-            </div>
-
-            <div class="column has-text-centered">
-              <!-- Code (Coming Soon) button hidden for now — uncomment to restore
-              <span class="link-block">
-                <a class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (Coming Soon)
-                  </span>
-                </a>
-              </span>
-              -->
-
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2507.01008" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-            </div>
-            <!-- Join Waitlist button hidden for now — uncomment to restore
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKY6ytECnUhm9cvhBMHQg4BA9cfU0vOAlzGBlCn1N8VDJ8ZA/viewform?usp=sharing&ouid=100835751114693391084"
-              target="_blank"
-              style="background: #007bff; color: white; border: 2px solid #007bff; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-family: 'Google Sans', sans-serif; margin-top: 20px;"
-              onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-1px)'"
-              onmouseout="this.style.background='#007bff'; this.style.transform='translateY(0)'"> Join Waitlist to
-              Purchase a DexWrist! </a>
-            -->
-
-          </div>
-        </div>
+  <header class="publication-header">
+    <div class="container">
+      <p class="publication-venue">RA-L 2026 · arXiv:2507.01008</p>
+      <h1 class="publication-title"><strong>DexWrist:</strong> A Robotic Wrist for Constrained and Dynamic Manipulation</h1>
+      <div class="publication-authors">
+        <a href="https://martinpeticco.com" target="_blank" rel="noopener">Martin Peticco</a><span aria-hidden="true"> · </span>
+        <a href="https://www.linkedin.com/in/gabriella-ulloa-8722431b4/" target="_blank" rel="noopener">Gabriella Ulloa</a><span aria-hidden="true"> · </span>
+        <span>John Marangola</span><span aria-hidden="true"> · </span>
+        <a href="https://www.nitishdashora.com/" target="_blank" rel="noopener">Nitish Dashora</a><span aria-hidden="true"> · </span>
+        <a href="https://people.csail.mit.edu/pulkitag/" target="_blank" rel="noopener">Pulkit Agrawal</a>
+      </div>
+      <p class="publication-affiliation">Improbable AI Lab, Massachusetts Institute of Technology</p>
+      <div class="publication-links">
+        <a class="paper-link" href="https://arxiv.org/abs/2507.01008" target="_blank" rel="noopener">arXiv</a>
+        <a class="paper-link paper-link-secondary" href="https://arxiv.org/pdf/2507.01008" target="_blank" rel="noopener">PDF</a>
       </div>
     </div>
-  </section>
+  </header>
 
-
+  <main id="main-content">
   <!-- ==================== MOTIVATION ==================== -->
-  <section class="section hero is-small is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="content has-text-justified">
-          <h1 class="section-title">Motivation</h1>
-          <div style="font-size: 2em; color: #666; line-height: 1; margin-bottom: 10px;">&ldquo;</div>
-          <div style="font-size: 1.4em; margin-left: 40px; line-height: 1.2; margin-bottom: 10px;">
-            <p>The spatial orientation of an end-effector such as a hand or a gripper is closely tied to its ability to
-              perform a desired task [...] Yet both the academic and industrial research communities have tended to
-              place more focus on hand/gripper development than that of wrist systems. </p>
-
-            <p>Recent prosthetics investigations, however, have shown that <b>increased dexterity in wrist prostheses
-                may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist
-                capability. </b> <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8624352"
-                target="_blank" style="color: blue;"> [1] </a></p>
-          </div>
-          <div style="font-size: 2em; color: #666; line-height: 1; text-align: right;">&rdquo;</div>
-        </div>
+  <section class="section motivation">
+    <div class="container motivation-layout">
+      <div>
+        <h2 class="section-title">Motivation</h2>
+        <blockquote class="motivation-quote">
+          <p>The spatial orientation of an end-effector such as a hand or a gripper is closely tied to its ability to
+            perform a desired task [...] Yet both the academic and industrial research communities have tended to
+            place more focus on hand/gripper development than that of wrist systems.</p>
+          <p>Recent prosthetics investigations, however, have shown that <strong>increased dexterity in wrist prostheses
+            may contribute more to manipulation capacity than a highly dexterous terminal device with limited wrist
+            capability.</strong> <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8624352"
+            target="_blank" rel="noopener">[1]</a></p>
+        </blockquote>
       </div>
+      <figure class="wrist-overview">
+        <video id="wristOverview" muted loop playsinline controls preload="metadata"
+          poster="static/images/wrist-overview.jpg" width="400" height="225" aria-label="Rotating view of DexWrist">
+          <source src="static/videos/wrist-overview.mp4" type="video/mp4">
+        </video>
+        <figcaption><strong>DexWrist is fast.</strong><span>Measured no-load speed: 96.6 &plusmn; 9.4 rpm.</span></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -257,7 +83,7 @@
   <section class="section teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">DexWrist enables highly dynamic and contact-rich tasks</h1>
+        <h2 class="section-title">DexWrist enables highly dynamic and contact-rich tasks</h2>
         <div class="teaser-gifs">
           <div class="gif-item">
             <img src="static/images/bottleflip.gif" alt="Bottle Flip">
@@ -272,10 +98,9 @@
             <p>Autonomous (1x Speed)</p>
           </div>
         </div>
-        <br>
-        <h2 class="subtitle has-text-centered">
+        <p class="subtitle has-text-centered">
           <b>(1X Speed)</b> DexWrist performs highly dynamic tasks with human-level wrist dexterity.
-        </h2>
+        </p>
       </div>
     </div>
   </section>
@@ -285,7 +110,7 @@
   <section class="section teaser has-background-light">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">DexWrist enables constrained-space manipulation</h1>
+        <h2 class="section-title">DexWrist enables constrained-space manipulation</h2>
         <div class="teaser-gifs">
           <div class="gif-item">
             <img src="static/images/fridgepick.gif" alt="Fridge Pick">
@@ -300,10 +125,9 @@
             <p>Demonstration</p>
           </div>
         </div>
-        <br>
-        <h2 class="subtitle has-text-centered">
+        <p class="subtitle has-text-centered">
           <b>(1X Speed)</b> DexWrist enables manipulation in constrained spaces where traditional wrists fail.
-        </h2>
+        </p>
       </div>
     </div>
   </section>
@@ -314,16 +138,14 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h1 class="section-title">Why DexWrist?</h1>
+          <h2 class="section-title">Why DexWrist?</h2>
           <div class="content has-text-justified">
-            <p>
             <ul>
               <li>Enables constrained, dynamic manipulation tasks on any robot arm</li>
               <li>Torque transparency and easily simulatable kinematics enables dynamic policy learning</li>
               <li>Facilitates faster teleoperation for more scalable data collection</li>
               <li>Reduces trajectory lengths, making policy learning more efficient</li>
             </ul>
-            </p>
           </div>
         </div>
       </div>
@@ -332,43 +154,43 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
 
-          <h2 class="section-title" style="font-size: 1.6em;">Decoupled Parallel Kinematic Mechanism</h2>
+          <h3 class="section-title subsection-title">Decoupled Parallel Kinematic Mechanism</h3>
 
           <div class="explainimg">
-            <video poster="" id="wristAnim" autoplay muted loop height="100%">
+            <video id="wristAnim" muted loop playsinline controls preload="metadata">
               <source src="static/videos/WristAnimation.mp4" type="video/mp4">
             </video>
           </div>
 
-          <h2 class="explaintext">A novel 2-DOF Parallel Kinematic Mechanism (PKM) achieves <b>co-located pitch and yaw
+          <p class="explaintext">A novel 2-DOF Parallel Kinematic Mechanism (PKM) achieves <b>co-located pitch and yaw
             DOFs</b> while maintaining a <b>diagonal velocity-constraint Jacobian</b>, a
             one-to-one motor-to-DOF mapping at the constraint level
             (<a href="derivation.html">full derivation</a>).
             This improves constrained space performance by <b>reducing arm movement</b> needed for end effector rotation
             and provides <b>more intuitive teleoperation</b>.
-            The final DOF is achieved by mounting the wrist to an arm.</h2>
+            The final DOF is achieved by mounting the wrist to an arm.</p>
 
-          <h2 class="section-title" style="font-size: 1.6em;">Quasi-Direct Drive Actuators</h2>
+          <h3 class="section-title subsection-title">Quasi-Direct Drive Actuators</h3>
 
           <div class="explainimg">
-            <img src="static/images/gearboxregular.png">
-            <img src="static/images/gearboxexploded.png">
+            <img src="static/images/gearboxregular.png" alt="Assembled quasi-direct-drive actuator" loading="lazy">
+            <img src="static/images/gearboxexploded.png" alt="Exploded view of the planetary gearbox" loading="lazy">
           </div>
 
-          <h2 class="explaintext">Custom Quasi-Direct Drive (QDD) actuators with brushless motors and a 13:1 planetary
+          <p class="explaintext">Custom Quasi-Direct Drive (QDD) actuators with brushless motors and a 13:1 planetary
             gearbox allows for <b>dynamic</b> tasks due to its <b>backdriveability and speed</b>, much how humanoid
-            robots achieved dynamic movement using such actuators.</h2>
+            robots achieved dynamic movement using such actuators.</p>
 
-          <h2 class="explaintext" style="padding-bottom: 20px;">DexWrist exhibits co-located DOFs similar to the human wrist, which is a condyloid/ellipsoidal joint.</h2>
+          <p class="explaintext" style="padding-bottom: 20px;">DexWrist exhibits co-located DOFs similar to the human wrist, which is a condyloid/ellipsoidal joint.</p>
 
           <div class="explainimg">
-            <video poster="" id="wristSpin" autoplay muted loop height="100%">
+            <video id="wristSpin" muted loop playsinline controls preload="metadata">
               <source src="static/videos/wristspinfast.mp4" type="video/mp4">
             </video>
           </div>
 
-          <h2 class="explaintext">[1x Speed] DexWrist has a large workspace and fits on most commercial robotic
-            arms (AgileX shown). This makes fast, dynamic tasks possible on any arm.</h2>
+          <p class="explaintext">[1x Speed] DexWrist has a large workspace and fits on most commercial robotic
+            arms (AgileX shown). This makes fast, dynamic tasks possible on any arm.</p>
         </div>
       </div>
     </div>
@@ -379,7 +201,7 @@
   <section class="section teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">Mechanical Validation</h1>
+        <h2 class="section-title">Mechanical Validation</h2>
         <p class="section-text" style="margin-bottom: 16px; color: #444;">
           Functional requirements and measured performance. Spec denotes the design target derived from cited work. ROM spec denotes minimum coverage and can be exceeded.
         </p>
@@ -489,8 +311,8 @@
   <section class="section teaser has-background-light">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">System-Level Evaluation</h1>
-        <div style="max-width: 820px; margin: 0 auto;">
+        <h2 class="section-title">System-Level Evaluation</h2>
+        <div>
           <p class="section-text" style="margin-bottom: 14px;">
             DexWrist augments a robot arm along two axes. Its decoupled parallel kinematic mechanism co-locates the
             wrist degrees of freedom, reducing the arm motion required to reorient the end-effector in constrained
@@ -518,11 +340,11 @@
   <section class="section teaser has-background-light">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">Reachability Experiment</h1>
+        <h2 class="section-title">Reachability Experiment</h2>
         <p class="subtitle has-text-centered" style="padding-top: 0; margin-bottom: 20px;">
           Assessing the kinematic contribution on the AgileX PiPER
         </p>
-        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <div>
           <p class="section-text" style="margin-bottom: 16px;">
             We compared the reachable workspace of the stock AgileX PiPER against the AgileX PiPER with DexWrist
             in a simulated kitchen cabinet reaching task.
@@ -550,12 +372,12 @@
   <section class="section teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">Teleoperation User Study</h1>
-        <h2 class="subtitle has-text-centered" style="padding-top: 0; margin-bottom: 20px;">
+        <h2 class="section-title">Teleoperation User Study</h2>
+        <p class="subtitle has-text-centered" style="padding-top: 0; margin-bottom: 20px;">
           Shorter demonstrations and reduced operator effort across the constrained AgileX tasks and contact-rich wiping
-        </h2>
+        </p>
         <div class="teaser-gifs teleop-split">
-          <div class="gif-item teleop-left">
+          <div class="gif-item teleop-left" role="region" aria-label="Teleoperation results" tabindex="0">
             <table class="compact-table">
               <thead>
                 <tr>
@@ -624,7 +446,7 @@
               teleoperator time in constrained spaces.</p>
           </div>
           <div class="gif-item teleop-right">
-            <iframe id="teleopChartFrame" src="teleop.html" width="100%" style="border:0; overflow:hidden; height:570px;" frameborder="0" scrolling="no"></iframe>
+            <iframe title="Teleoperation duration comparison" id="teleopChartFrame" src="teleop.html" width="100%" style="border:0; overflow:hidden; height:570px;" frameborder="0" scrolling="no"></iframe>
             <p class="section-text" style="text-align: left;">DexWrist&rsquo;s co-located DOFs and low-impedance actuation yield shorter demonstrations
               in constrained and contact-rich tasks.
               <b>1.3&ndash;2.2&times;</b> shorter individual demonstrations on the AgileX and UR3e tasks;
@@ -682,15 +504,15 @@
   <section class="section teaser has-background-light">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">Policy Learning Results</h1>
-        <h2 class="subtitle has-text-centered" style="padding-top: 0; margin-bottom: 10px;">
+        <h2 class="section-title">Policy Learning Results</h2>
+        <p class="subtitle has-text-centered" style="padding-top: 0; margin-bottom: 10px;">
           Behavior-cloning success on the constrained AgileX task and the contact-rich UR3e task
-        </h2>
+        </p>
         <p class="stat-highlight" style="margin-bottom: 20px;">
           DexWrist achieved <span>50&ndash;76%</span> relative improvement in policy success rates on the AgileX and UR3e
         </p>
 
-        <iframe id="dpChartFrame" src="dp_chart_new.html" width="100%" style="border:0; overflow:hidden; height:450px;"
+        <iframe title="Policy learning results and task videos" id="dpChartFrame" src="dp_chart_new.html" width="100%" style="border:0; overflow:hidden; height:450px;"
           frameborder="0" scrolling="no"></iframe>
         <script>
           (function () {
@@ -736,8 +558,8 @@
         </script>
 
         <hr style="max-width: 820px; margin: 40px auto 0; border: none; border-top: 1px solid #ddd;">
-        <h2 class="section-title" style="font-size: 1.6em; margin-top: 30px;">Wiping Under a Strong Compliant-Control Baseline</h2>
-        <p class="section-text" style="color: #444; max-width: 780px; margin-bottom: 6px;">
+        <h3 class="section-title subsection-title">Wiping Under a Strong Compliant-Control Baseline</h3>
+        <p class="section-text" style="margin-bottom: 6px;">
           To confirm that the wiping improvement reflects the wrist hardware rather than the UR3e's admittance
           controller, we repeat the evaluation on a torque-controlled Franka FR3, whose joint-impedance control already
           performs the task well. Success is saturated for both conditions (stock 19/20, DexWrist 20/20), so completion
@@ -759,7 +581,7 @@
   <section class="section teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">Autonomous Task Completion</h1>
+        <h2 class="section-title">Autonomous Task Completion</h2>
         <p class="stat-highlight">
           Diffusion policies trained for DexWrist reduced task completion times by <span>3&ndash;5&times;</span> on the
           AgileX PiPER and UR3e, and <span>1.4&times;</span> on the torque-controlled Franka FR3
@@ -818,7 +640,7 @@
             </tbody>
           </table>
         </div>
-        <p class="section-text" style="color: #444; margin: 16px auto 0; max-width: 650px;">
+        <p class="section-text" style="margin-top: 16px;">
           The AgileX + DexWrist completed the constrained pick-and-place task <b>3.24&times;</b> faster,
           and the UR3e + DexWrist completed the dynamic wiping task <b>4.92&times;</b> faster
           than the default configurations. On the Franka FR3, whose high-quality joint-impedance baseline already
@@ -837,11 +659,11 @@
   <section class="section teaser has-background-light">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <h1 class="section-title">Supplementary Material</h1>
+        <h2 class="section-title">Supplementary Material</h2>
         <p class="section-text" style="margin-bottom: 18px; color: #444;">
           Full derivations, protocols, and per-trial data referenced by the paper.
         </p>
-        <div class="content" style="max-width: 820px; margin: 0 auto;">
+        <div class="content">
           <ul style="line-height: 1.9;">
             <li><a href="derivation.html"><b>Kinematics &amp; statics derivation</b></a> &mdash; the forward and
               inverse kinematics, the diagonal velocity-constraint Jacobian, and the
@@ -875,5 +697,6 @@
   </section>
   -->
 
+  </main>
 </body>
 </html>

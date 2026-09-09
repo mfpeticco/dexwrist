@@ -1,0 +1,5 @@
+.env
+.env.*
+
+# Local design comparison, not part of the public research site.
+/design-preview.html

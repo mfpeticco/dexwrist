@@ -4,16 +4,14 @@
   Notation matches paper/root.tex. Kinematics CAD-verified; statics bench-verified
   (see crossaxis.html for the measurement).
 -->
-<html lang="en">
+<html lang="en" data-header-treatment="contained">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DexWrist — Kinematics &amp; Statics Derivation</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
 
   <!-- MathJax 3 (the base site renders no math; this page adds it self-contained). -->
   <script>
@@ -30,20 +28,20 @@
 
   <style>
     /* ---- Page-specific layout, layered on top of the site's Bulma + index.css ---- */
-    html { font-size: 118%; }
+    /* Type scale is shared with the project page. */
 
     .deriv-wrap {
-      max-width: 900px;
+      max-width: var(--maxw);
       margin: 0 auto;
       padding: 0 22px;
       line-height: 1.6;
-      font-family: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: inherit;
     }
 
     .deriv-wrap h2.section-title { margin-top: 12px; }
 
     .deriv-wrap h3 {
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-size: 1.35em;
       font-weight: 700;
       color: #1a1a1a;
@@ -53,7 +51,7 @@
     }
 
     .deriv-wrap h4 {
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-size: 1.08em;
       font-weight: 600;
       color: #2d3748;
@@ -83,7 +81,7 @@
     }
     .callout .callout-label {
       display: block;
-      font-family: 'Google Sans', sans-serif;
+      font-family: inherit;
       font-weight: 700;
       font-size: 0.82em;
       letter-spacing: 0.04em;
@@ -99,7 +97,7 @@
     table.deriv-table {
       border-collapse: collapse;
       width: 100%;
-      font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+      font-family: inherit;
       font-size: 0.98em;
     }
     table.deriv-table th, table.deriv-table td {
@@ -121,9 +119,10 @@
     /* keep long display equations from forcing horizontal page scroll */
     mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
   </style>
+  <link rel="stylesheet" href="static/css/index.css">
 </head>
 
-<body>
+<body class="supplement-page">
 
   <!-- ==================== HEADER ==================== -->
   <section class="hero is-small is-light">
